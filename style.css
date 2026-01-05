@@ -145,7 +145,7 @@ button:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   #layout {
     flex-direction: row;
   }
