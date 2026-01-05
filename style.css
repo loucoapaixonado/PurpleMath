@@ -1,0 +1,161 @@
+body {
+  background: #2a0a4a;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+#layout {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+#sidebar {
+  display: none;
+  width: 220px;
+  background: #2e1065;
+  border-radius: 24px;
+  padding: 16px;
+}
+
+#sidebar h3 {
+  margin-bottom: 12px;
+}
+
+#sidebar.mobile-open {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 260px;
+  z-index: 1000;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+}
+
+#menuToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+  width: 50px;
+  height: 50px;
+  background: #7c3aed;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.lesson-item {
+  font-size: 15px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  cursor: pointer;
+  background: #4c1d95;
+  transition: 0.2s;
+}
+
+.lesson-item:hover {
+  background: #6d28d9;
+}
+
+.lesson-item:active {
+  transform: scale(0.97);
+}
+
+.lesson-done {
+  background: #7c3aed;
+}
+
+.lesson-locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#app {
+  width: 100%;
+  max-width: 420px;
+  background: #3b1160;
+  padding: 20px;
+  border-radius: 24px;
+}
+
+button {
+  margin: 6px 0;
+  width: 100%;
+  touch-action: manipulation;
+  background: #7c3aed;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #8b5cf6;
+}
+
+#character {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+#character img {
+  width: 250px;
+  animation: float 3s ease-in-out infinite;
+}
+
+#speech {
+  background: #6d28d9;
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 220px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* TRANSIÇÕES DE TELA */
+.fade {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0.5 }
+  100% { transform: scale(1); opacity: 1 }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 768px) {
+  #layout {
+    flex-direction: row;
+  }
+
+  #sidebar {
+    display: block;
+  }
+
+  #menuToggle {
+    display: none;
+  }
+}
+
