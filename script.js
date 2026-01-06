@@ -28,7 +28,7 @@ const dino = {
 
 const dinoSpeech = {
   welcome: "Oi! Eu sou o Spike. Vamos aprender juntinhos?",
-  map: "Que tal comerçar mais uma lição? 💜",
+  map: "Que tal começar uma lição? 💜",
   correct: [
     "Issooo! Mandou muito bem ✨",
     "Eu sabia que você ia conseguir!",
@@ -37,7 +37,7 @@ const dinoSpeech = {
   wrong: [
     "Tudo bem errar 💜 tenta de novo!",
     "Sem pressa, eu tô aqui!",
-    "Quase! Você é bom!."
+    "Quase! Você é boa!."
   ],
   finishLesson: "Uau! Lição completa 🎉",
   finishPhase: "Você completou tudo! Você é muito inteligente! 🦖💜"
@@ -60,42 +60,42 @@ const lessons = [
     title: "➕ Juntando fósseis",
     story: "Achei mais ossos de dinossauro, vamos juntar tudo!",
     challenges: [
-      { question: "2 + 1", options: [2, 3, 4], answer: 3 },
-      { question: "3 + 2", options: [4, 5, 6], answer: 5 },
-      { question: "4 + 3", options: [6, 7, 8], answer: 7 }
+      { question: "Eu tinha 2 ossos, achei mais 1. <br><br> 🦴🦴 + 🦴 <br><br> Quantos ossos eu tenho agora?", options: [2, 3, 4], answer: 3 },
+      { question: "Eu tinha 3 ossos, achei mais 2. <br><br> 🦴🦴🦴 + 🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [4, 5, 6], answer: 5 },
+      { question: "Eu tinha 4 ossos, achei mais 3. <br><br> 🦴🦴🦴🦴 + 🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [6, 7, 8], answer: 7 }
     ],
     xp: 20
   },
   {
     id: "dino_subtracao",
-    title: "➖ Emprestando fósseis",
+    title: "➖ Perdendo fósseis",
     story: "Ah não! Eu perdi alguns ossos de dinossauro!",
     challenges: [
-      { question: "5 - 1", options: [3, 4, 5], answer: 4 },
-      { question: "6 - 2", options: [3, 4, 5], answer: 4 },
-      { question: "7 - 3", options: [3, 4, 5], answer: 4 }
+      { question: "Eu tinha 5 ossos, perdi 1. <br><br> 🦴🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
+      { question: "Eu tinha 6 ossos, perdi 2. <br><br> 🦴🦴❌🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
+      { question: "Eu tinha 7 ossos, perdi 3. <br><br> 🦴❌❌🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 }
     ],
     xp: 20
   },
   {
     id: "dino_multiplicacao",
-    title: "✖️ Caixas de ovos",
-    story: "🦖 Dino organizou ovos em caixas 🥚",
+    title: "✖️ Ninho de ovos",
+    story: "Olha que legal! Encontrei alguns ninhos de dinossauros! 🥚",
     challenges: [
-      { question: "2 caixas com 2 ovos", options: [2, 4, 6], answer: 4 },
-      { question: "3 caixas com 2 ovos", options: [4, 6, 8], answer: 6 },
-      { question: "4 caixas com 3 ovos", options: [9, 12, 15], answer: 12 }
+      { question: "Aqui tem 2 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [2, 4, 6], answer: 4 },
+      { question: "Aqui tem 3 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [4, 6, 8], answer: 6 },
+      { question: "Aqui tem 4 ninhos com 3 ovos em cada um.<br><br> [🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos temos?", options: [9, 12, 15], answer: 12 }
     ],
     xp: 25
   },
   {
     id: "dino_divisao",
     title: "➗ Dividindo fósseis",
-    story: "🦖 Dino dividiu fósseis entre amigos!",
+    story: "Humm, tem alguns ovos fora do ninho. Vamos colocar no lugar!",
     challenges: [
-      { question: "4 fósseis para 2 dinos", options: [1, 2, 3], answer: 2 },
-      { question: "6 fósseis para 3 dinos", options: [1, 2, 3], answer: 2 },
-      { question: "8 fósseis para 4 dinos", options: [1, 2, 3], answer: 2 }
+      { question: "Temos 4 ovos e 2 ninhos.<br><br>[🥚🥚] [🥚🥚]<br><br>Qantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
+      { question: "Temos 6 ovos e 3 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Qantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
+      { question: "Temos 8 ovos e 4 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚] [🥚🥚]<br><br>Qantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 }
     ],
     xp: 25
   }
@@ -172,7 +172,7 @@ function renderSidebar() {
   const sidebar = document.getElementById("sidebar")
 
   sidebar.innerHTML = `
-    <h3>🦖 Fase 1</h3>
+    <h3>🦖 Fase 1: Dinosauros</h3>
     ${lessons
       .map((lesson, index) => {
         const isDone = completedLessons.includes(lesson.id)
@@ -194,6 +194,9 @@ function renderSidebar() {
         `
       })
       .join("")}
+    <button onclick="resetProgress()" style="margin-top:20px; background:#f65c5c; font-size:14px; font-weight:normal; height:auto;">
+      Redefinir Progresso
+    </button>
   `
 }
 
@@ -204,6 +207,16 @@ function goToLesson(index) {
   renderMap()
 
   sidebar.classList.remove("mobile-open")
+}
+
+function resetProgress() {
+  if (confirm("Tem certeza que deseja redefinir seu progresso? O jogo será reiniciado.")) {
+    xp = 0
+    currentLessonIndex = 0
+    completedLessons = []
+    saveProgress()
+    location.reload()
+  }
 }
 
 // =======================
@@ -217,8 +230,9 @@ function renderMap() {
     playSound("transition")
     document.getElementById("screen").className = "fade"
     document.getElementById("screen").innerHTML = `
-      <h2>🎉 FASE 1 COMPLETA!</h2>
-      <p>🦖 Dino está orgulhoso de você 💜</p>
+      <h2>🎉 FASE 1 COMPLETA! PARABÉNS 👏</h2>
+      <p>🦖 Spike está orgulhoso de você 💜</p>
+      <p>😄 Você é muito boa em fazer contas</p>
       <p>🐋 Oceano desbloqueado em breve...</p>
     `
     dino.set("win")
@@ -253,7 +267,7 @@ function renderChallenge() {
   document.getElementById("screen").className = "fade"
   document.getElementById("screen").innerHTML = `
     <h2>${challenge.question}</h2>
-
+    <div id="optionsButons">
     ${challenge.options
       .map(
         opt => `
@@ -263,7 +277,7 @@ function renderChallenge() {
       `
       )
       .join("")}
-
+    </div>
     <p id="feedback" style="margin-top:10px;"></p>
   `
 }

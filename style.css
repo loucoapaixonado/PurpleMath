@@ -2,16 +2,8 @@ body {
   background: #2a0a4a;
   color: white;
   font-family: Arial, sans-serif;
-  display: flex;
   justify-content: center;
-  padding-top: 40px;
-}
-
-#layout {
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  width: 80%;
+  padding-top: 20px;
 }
 
 #sidebar {
@@ -39,8 +31,8 @@ body {
 
 #menuToggle {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   z-index: 1100;
   width: 50px;
   height: 50px;
@@ -81,22 +73,23 @@ body {
 }
 
 #app {
-  width: 100%;
   background: #3b1160;
   padding: 20px;
   border-radius: 24px;
 }
 
 button {
-  margin: 6px 0;
+  margin: 6px;
   width: 100%;
+  height: 60px;
   touch-action: manipulation;
   background: #7c3aed;
   border: none;
   color: white;
   padding: 12px;
-  border-radius: 16px;
-  font-size: 16px;
+  border-radius: 999px;
+  font-size: 25px;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -104,8 +97,21 @@ button:hover {
   background: #8b5cf6;
 }
 
+#optionsButons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+#optionsButons button {
+  width: 60px;
+}
+
 #character {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 30px;
@@ -128,6 +134,7 @@ button:hover {
   max-width: 220px;
   font-size: 14px;
   line-height: 1.4;
+  margin-top: 30px;
 }
 
 /* TRANSIÇÕES DE TELA */
@@ -156,21 +163,5 @@ button:hover {
   100% { transform: scale(1); }
 }
 
-@media (min-width: 1000px) {
-  #layout {
-    flex-direction: row;
-  }
 
-  #sidebar {
-    display: block;
-  }
-
-  #app {
-    max-width: 420px;
-  }
-
-  #menuToggle {
-    display: none;
-  }
-}
 
