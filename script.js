@@ -16,28 +16,38 @@ const READ_TIME = 1800 // ms → 1.8 segundos (ajuste se quiser)
 // =======================
 // LIÇÕES — FASE 1 (DINO)
 // =======================
+const dino = {
+  img: document.getElementById("dinoImg"),
+  set(expression) {
+    this.img.src = `assets/dino-${expression}.png`
+    this.img.classList.remove("dino-react")
+    void this.img.offsetWidth // restart animation
+    this.img.classList.add("dino-react")
+  }
+}
+
 const dinoSpeech = {
-  welcome: "Oi! Eu sou o Dino 🦖 Vamos aprender juntinhos?",
-  map: "Escolhe uma lição! Eu vou te ajudar 💜",
+  welcome: "Oi! Eu sou o Spike. Vamos aprender juntinhos?",
+  map: "Que tal comerçar mais uma lição? 💜",
   correct: [
     "Issooo! Mandou muito bem ✨",
-    "Eu sabia que você conseguia!",
+    "Eu sabia que você ia conseguir!",
     "Aprender assim é mais gostoso 😄"
   ],
   wrong: [
     "Tudo bem errar 💜 tenta de novo!",
     "Sem pressa, eu tô aqui!",
-    "Quase! Vamos juntos."
+    "Quase! Você é bom!."
   ],
   finishLesson: "Uau! Lição completa 🎉",
-  finishPhase: "Você completou toda a ilha! 🦖💜"
+  finishPhase: "Você completou tudo! Você é muito inteligente! 🦖💜"
 }
 
 const lessons = [
   {
     id: "dino_contar",
     title: "🦴 Contando fósseis",
-    story: "🦖 Dino está contando seus fósseis roxos 💜",
+    story: "Quantos ossos de dinossauro temos aqui 💜",
     challenges: [
       { question: "🦴 🦴 🦴", options: [2, 3, 4], answer: 3 },
       { question: "🦴 🦴", options: [1, 2, 3], answer: 2 },
@@ -48,7 +58,7 @@ const lessons = [
   {
     id: "dino_soma",
     title: "➕ Juntando fósseis",
-    story: "🦖 Dino encontrou mais fósseis e juntou tudo!",
+    story: "Achei mais ossos de dinossauro, vamos juntar tudo!",
     challenges: [
       { question: "2 + 1", options: [2, 3, 4], answer: 3 },
       { question: "3 + 2", options: [4, 5, 6], answer: 5 },
@@ -59,7 +69,7 @@ const lessons = [
   {
     id: "dino_subtracao",
     title: "➖ Emprestando fósseis",
-    story: "🦖 Dino emprestou fósseis para um amigo 🦕",
+    story: "Ah não! Eu perdi alguns ossos de dinossauro!",
     challenges: [
       { question: "5 - 1", options: [3, 4, 5], answer: 4 },
       { question: "6 - 2", options: [3, 4, 5], answer: 4 },
@@ -211,10 +221,12 @@ function renderMap() {
       <p>🦖 Dino está orgulhoso de você 💜</p>
       <p>🐋 Oceano desbloqueado em breve...</p>
     `
+    dino.set("win")
     showCongratsMessage(dinoSpeech.finishPhase)
     return
   }
 
+  dino.set("idle")
   setSpeech(dinoSpeech.map)
   playSound("transition")
   document.getElementById("screen").className = "fade"
@@ -236,6 +248,7 @@ function renderChallenge() {
   const lesson = lessons[currentLessonIndex]
   const challenge = lesson.challenges[currentChallengeIndex]
 
+  dino.set("idle")
   setSpeech(lessons[currentLessonIndex].story)
   document.getElementById("screen").className = "fade"
   document.getElementById("screen").innerHTML = `
@@ -262,6 +275,7 @@ function checkAnswer(option) {
 
   if (option === challenge.answer) {
     playSound("correct")
+    dino.set("happy")
     setSpeech(
       dinoSpeech.correct[
         Math.floor(Math.random() * dinoSpeech.correct.length)
@@ -287,6 +301,7 @@ function checkAnswer(option) {
       renderPhaseBar()
       renderSidebar()
 
+      dino.set("win")
       showCongratsMessage(
         dinoSpeech.finishLesson,
         renderMap
@@ -301,6 +316,7 @@ function checkAnswer(option) {
     }
   } else {
     playSound("wrong")
+    dino.set("sad")
     setSpeech(
       dinoSpeech.wrong[
         Math.floor(Math.random() * dinoSpeech.wrong.length)
