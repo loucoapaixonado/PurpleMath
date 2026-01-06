@@ -12,6 +12,10 @@ const sounds = {
   transition: new Audio("assets/sound-transition.mp3")
 }
 const READ_TIME = 1800 // ms → 1.8 segundos (ajuste se quiser)
+const introScreen = document.getElementById("introScreen")
+const introText = document.getElementById("introText")
+const introBtn = document.getElementById("introBtn")
+const introDino = document.getElementById("introDino")
 
 // =======================
 // LIÇÕES — FASE 1 (DINO)
@@ -27,6 +31,11 @@ const dino = {
 }
 
 const dinoSpeech = {
+  introPhase:`
+    Oi! Eu sou o Dino Roxo 🦖💜  
+    Eu vou te acompanhar nessa aventura pela matemática.
+    Aqui não tem pressa, nem pressão — só aprendizado do jeitinho certo.
+    Vamos juntos?`,
   welcome: "Oi! Eu sou o Spike. Vamos aprender juntinhos?",
   map: "Que tal começar uma lição? 💜",
   correct: [
@@ -40,7 +49,12 @@ const dinoSpeech = {
     "Quase! Você é boa!."
   ],
   finishLesson: "Uau! Lição completa 🎉",
-  finishPhase: "Você completou tudo! Você é muito inteligente! 🦖💜"
+  finishPhase: "Você completou tudo! Você é muito inteligente! 🦖💜",
+  endPhase:`
+    Uau! Você mandou muito bem! 🎉  
+    Estou orgulhoso de você.
+    Matemática fica muito mais fácil quando a gente vai com calma.
+    Preparada para a próxima aventura?`
 }
 
 const lessons = [
@@ -204,7 +218,7 @@ function goToLesson(index) {
   currentLessonIndex = index
   currentChallengeIndex = 0
   saveProgress()
-  renderMap()
+  startPhase()
 
   sidebar.classList.remove("mobile-open")
 }
@@ -219,9 +233,36 @@ function resetProgress() {
   }
 }
 
+function showPhaseScreen({ text, button, expression, onConfirm }) {
+  introText.textContent = text
+  introBtn.textContent = button
+  introDino.src = `assets/dino-${expression}.png`
+
+  introScreen.style.display = "flex"
+
+  introBtn.onclick = () => {
+    introScreen.style.display = "none"
+    if (onConfirm) onConfirm()
+  }
+}
+
 // =======================
 // MAPA
 // =======================
+function startPhase() {
+  if (currentLessonIndex === 0) {
+    showPhaseScreen({
+      text: dinoSpeech.introPhase,
+      button: "Começar aventura",
+      expression: "idle",
+      onConfirm: renderMap
+    })
+  } else {
+    introScreen.style.display = "none"
+    renderMap()
+  }
+}
+
 function renderMap() {
   currentChallengeIndex = 0
 
@@ -236,7 +277,11 @@ function renderMap() {
       <p>🐋 Oceano desbloqueado em breve...</p>
     `
     dino.set("win")
-    showCongratsMessage(dinoSpeech.finishPhase)
+    showPhaseScreen({
+      text: dinoSpeech.endPhase,
+      button: "Continuar",
+      expression: "win"
+    })
     return
   }
 
@@ -318,7 +363,7 @@ function checkAnswer(option) {
       dino.set("win")
       showCongratsMessage(
         dinoSpeech.finishLesson,
-        renderMap
+        startPhase
       )
     } else {
       showCongratsMessage(
@@ -345,5 +390,5 @@ function checkAnswer(option) {
 renderProgress()
 renderPhaseBar()
 renderSidebar()
-renderMap()
+startPhase ()
 
