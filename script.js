@@ -6,12 +6,14 @@ let currentLessonIndex = Number(localStorage.getItem("lessonIndex")) || 0
 let currentChallengeIndex = 0
 let completedLessons =
   JSON.parse(localStorage.getItem("completedLessons")) || []
+let activeChallenges = []
 const sounds = {
   correct: new Audio("assets/sound-correct.mp3"),
   wrong: new Audio("assets/sound-wrong.mp3"),
   transition: new Audio("assets/sound-transition.mp3")
 }
 const READ_TIME = 1800 // ms → 1.8 segundos (ajuste se quiser)
+const LONG_READ_TIME = 2500 // ms → 2.5 segundos (ajuste se quiser)
 const introScreen = document.getElementById("introScreen")
 const introText = document.getElementById("introText")
 const introBtn = document.getElementById("introBtn")
@@ -32,11 +34,11 @@ const dino = {
 
 const dinoSpeech = {
   introPhase:`
-    Oi! Eu sou o Dino Roxo 🦖💜  
+    Oi neném! Eu sou o Spike 💜  
     Eu vou te acompanhar nessa aventura pela matemática.
-    Aqui não tem pressa, nem pressão — só aprendizado do jeitinho certo.
-    Vamos juntos?`,
-  welcome: "Oi! Eu sou o Spike. Vamos aprender juntinhos?",
+    Sei que sou um dragão, mas serei seu guia na ilha dos dinossauros hehehe.
+    Vamos aprender juntos?
+    E também vamos ganhar uns coisas legais pelo caminho! 😉`,
   map: "Que tal começar uma lição? 💜",
   correct: [
     "Issooo! Mandou muito bem ✨",
@@ -48,8 +50,23 @@ const dinoSpeech = {
     "Sem pressa, eu tô aqui!",
     "Quase! Você é boa!."
   ],
+  progress: {
+    start: [
+      "Ei, você já começou! Isso é o mais importante 💜",
+      "Primeiro passo dado! Estou orgulhoso de você. ✨"
+    ],
+    middle: [
+      "Olha só quanto você já avançou! 🚀",
+      "Você está pegando o jeito, hein?",
+      "Tá vendo como matemática pode ser mais leve? 😄"
+    ],
+    almost: [
+      "Uau! Parabéns você chegou até o aqui! 🏁",
+      "Eu sabia que você ia conseguir! ✨",
+      "Você chegou muito longe, parabéns! 🎉"
+    ]
+  },
   finishLesson: "Uau! Lição completa 🎉",
-  finishPhase: "Você completou tudo! Você é muito inteligente! 🦖💜",
   endPhase:`
     Uau! Você mandou muito bem! 🎉  
     Estou orgulhoso de você.
@@ -63,9 +80,16 @@ const lessons = [
     title: "🦴 Contando fósseis",
     story: "Quantos ossos de dinossauro temos aqui 💜",
     challenges: [
-      { question: "🦴 🦴 🦴", options: [2, 3, 4], answer: 3 },
+      { question: "🦴 ", options: [2, 3, 1], answer: 1 },
       { question: "🦴 🦴", options: [1, 2, 3], answer: 2 },
-      { question: "🦴 🦴 🦴 🦴", options: [3, 4, 5], answer: 4 }
+      { question: "🦴 🦴 🦴 ", options: [3, 4, 5], answer: 3 },
+      { question: "🦴 🦴 🦴 🦴", options: [3, 4, 5], answer: 4 },
+      { question: "🦴 🦴 🦴 🦴 🦴", options: [5, 6, 4], answer: 5 },
+      { question: "🦴 🦴 🦴 🦴 🦴 🦴", options: [3, 6, 5], answer: 6 },
+      { question: "🦴 🦴 🦴 🦴 🦴 🦴 🦴", options: [7, 4, 2], answer: 7 },
+      { question: "🦴 🦴 🦴 🦴 🦴 🦴 🦴 🦴", options: [10, 8, 5], answer: 8 },
+      { question: "🦴 🦴 🦴 🦴 🦴 🦴 🦴 🦴 🦴", options: [9, 2, 5], answer: 9 },
+      { question: "🦴 🦴 🦴 🦴 🦴 🦴 🦴 🦴 🦴 🦴", options: [1, 4, 10], answer: 10 }
     ],
     xp: 15
   },
@@ -76,7 +100,14 @@ const lessons = [
     challenges: [
       { question: "Eu tinha 2 ossos, achei mais 1. <br><br> 🦴🦴 + 🦴 <br><br> Quantos ossos eu tenho agora?", options: [2, 3, 4], answer: 3 },
       { question: "Eu tinha 3 ossos, achei mais 2. <br><br> 🦴🦴🦴 + 🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [4, 5, 6], answer: 5 },
-      { question: "Eu tinha 4 ossos, achei mais 3. <br><br> 🦴🦴🦴🦴 + 🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [6, 7, 8], answer: 7 }
+      { question: "Eu tinha 4 ossos, achei mais 3. <br><br> 🦴🦴🦴🦴 + 🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [6, 7, 8], answer: 7 },
+      { question: "Eu tinha 2 ossos, achei mais 2. <br><br> 🦴🦴 + 🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [2, 3, 4], answer: 4 },
+      { question: "Eu tinha 1 ossos, achei mais 4. <br><br> 🦴 + 🦴🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [2, 5, 4], answer: 5 },
+      { question: "Eu tinha 5 ossos, achei mais 5. <br><br> 🦴🦴🦴🦴🦴 + 🦴🦴🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [7, 3, 10], answer: 10 },
+      { question: "Eu tinha 2 ossos, achei mais 5. <br><br> 🦴🦴 + 🦴🦴🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [7, 6, 4], answer: 7 },
+      { question: "Eu tinha 3 ossos, achei mais 6. <br><br> 🦴🦴🦴 + 🦴🦴🦴🦴🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [1, 5, 9], answer: 9 },
+      { question: "Eu tinha 6 ossos, achei mais 1. <br><br> 🦴🦴🦴🦴🦴🦴 + 🦴 <br><br> Quantos ossos eu tenho agora?", options: [5, 7, 4], answer: 7 },
+      { question: "Eu tinha 7 ossos, achei mais 2. <br><br> 🦴🦴🦴🦴🦴🦴🦴 + 🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [9, 10, 6], answer: 9 }
     ],
     xp: 20
   },
@@ -87,7 +118,14 @@ const lessons = [
     challenges: [
       { question: "Eu tinha 5 ossos, perdi 1. <br><br> 🦴🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
       { question: "Eu tinha 6 ossos, perdi 2. <br><br> 🦴🦴❌🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
-      { question: "Eu tinha 7 ossos, perdi 3. <br><br> 🦴❌❌🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 }
+      { question: "Eu tinha 7 ossos, perdi 3. <br><br> 🦴❌❌🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
+      { question: "Eu tinha 9 ossos, perdi 3. <br><br> 🦴❌🦴🦴❌🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [6, 4, 5], answer: 6 },
+      { question: "Eu tinha 5 ossos, perdi 3. <br><br> ❌❌🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 8, 2], answer: 2 },
+      { question: "Eu tinha 4 ossos, perdi 2. <br><br> 🦴❌🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 2, 1], answer: 2 },
+      { question: "Eu tinha 9 ossos, perdi 5. <br><br> ❌🦴❌❌🦴❌🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [4, 7, 5], answer: 4 },
+      { question: "Eu tinha 7 ossos, perdi 4. <br><br> 🦴❌❌🦴❌🦴❌ <br><br> Quantos ossos sobraram?", options: [2, 4, 3], answer: 3 },
+      { question: "Eu tinha 2 ossos, perdi 1. <br><br> 🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 6, 1], answer: 1 },
+      { question: "Eu tinha 8 ossos, perdi 2. <br><br> 🦴🦴❌🦴🦴🦴❌🦴 <br><br> Quantos ossos sobraram?", options: [6, 3, 9], answer: 6 }
     ],
     xp: 20
   },
@@ -96,10 +134,17 @@ const lessons = [
     title: "✖️ Ninho de ovos",
     story: "Olha que legal! Encontrei alguns ninhos de dinossauros! 🥚",
     challenges: [
-      { question: "Aqui tem 2 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [2, 4, 6], answer: 4 },
-      { question: "Aqui tem 3 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [4, 6, 8], answer: 6 },
-      { question: "Aqui tem 4 ninhos com 3 ovos em cada um.<br><br> [🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos temos?", options: [9, 12, 15], answer: 12 }
-    ],
+    { question: "Aqui tem 2 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [2, 4, 6], answer: 4 },
+    { question: "Aqui tem 3 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [4, 6, 8], answer: 6 },
+    { question: "Aqui tem 4 ninhos com 3 ovos em cada um.<br><br> [🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos temos?", options: [12, 15, 9], answer: 12 },
+    { question: "Aqui tem 5 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚]<br>[🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [12, 8, 10], answer: 10 },
+    { question: "Aqui tem 3 ninhos com 3 ovos em cada um.<br><br> [🥚🥚🥚] [🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos temos?", options: [6, 9, 12], answer: 9 },
+    { question: "Aqui tem 6 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚]<br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [12, 8, 14], answer: 12 },
+    { question: "Aqui tem 4 ninhos com 4 ovos em cada um.<br><br> [🥚🥚🥚🥚] [🥚🥚🥚🥚]<br>[🥚🥚🥚🥚] [🥚🥚🥚🥚]<br><br>Quantos ovos temos?", options: [12, 11, 16], answer: 16 },
+    { question: "Aqui tem 2 ninhos com 5 ovos em cada um.<br><br> [🥚🥚🥚🥚🥚]<br>[🥚🥚🥚🥚🥚]<br><br>Quantos ovos temos?", options: [8, 10, 12], answer: 10 },
+    { question: "Aqui tem 7 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚] [🥚🥚]<br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [14, 12, 16], answer: 14 },
+    { question: "Aqui tem 5 ninhos com 3 ovos em cada um.<br><br> [🥚🥚🥚] [🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos temos?", options: [12, 10, 15], answer: 15 }
+  ],
     xp: 25
   },
   {
@@ -107,9 +152,16 @@ const lessons = [
     title: "➗ Dividindo fósseis",
     story: "Humm, tem alguns ovos fora do ninho. Vamos colocar no lugar!",
     challenges: [
-      { question: "Temos 4 ovos e 2 ninhos.<br><br>[🥚🥚] [🥚🥚]<br><br>Qantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
-      { question: "Temos 6 ovos e 3 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Qantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
-      { question: "Temos 8 ovos e 4 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚] [🥚🥚]<br><br>Qantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 }
+      { question: "Temos 4 ovos e 2 ninhos.<br><br>[🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
+      { question: "Temos 6 ovos e 3 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [1, 3, 2], answer: 2 },
+      { question: "Temos 8 ovos e 4 ninhos.<br><br>[🥚🥚] [🥚🥚]<br>[🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [2, 1, 3], answer: 2 },
+      { question: "Temos 10 ovos e 5 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚]<br>[🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
+      { question: "Temos 12 ovos e 6 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚]<br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [3, 1, 2], answer: 2 },
+      { question: "Temos 9 ovos e 3 ninhos.<br><br>[🥚🥚🥚] [🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [2, 3, 4], answer: 3 },
+      { question: "Temos 12 ovos e 4 ninhos.<br><br>[🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [2, 5, 3], answer: 3 },
+      { question: "Temos 15 ovos e 5 ninhos.<br><br>[🥚🥚🥚] [🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [3, 6, 4], answer: 3 },
+      { question: "Temos 16 ovos e 4 ninhos.<br><br>[🥚🥚🥚🥚] [🥚🥚🥚🥚]<br>[🥚🥚🥚🥚] [🥚🥚🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [3, 1, 4], answer: 4 },
+      { question: "Temos 18 ovos e 6 ninhos.<br><br>[🥚🥚🥚] [🥚🥚🥚] [🥚🥚🥚]<br>[🥚🥚🥚] [🥚🥚🥚] [🥚🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [3, 8, 1], answer: 3 }
     ],
     xp: 25
   }
@@ -219,8 +271,29 @@ function goToLesson(index) {
   currentChallengeIndex = 0
   saveProgress()
   startPhase()
-
   sidebar.classList.remove("mobile-open")
+}
+
+function getProgressLevel() {
+  const total = lessons.length
+  const done = completedLessons.length
+  const ratio = done / total
+
+  if (ratio <= 0.34) return "start"
+  if (ratio <= 0.75) return "middle"
+  return "almost"
+}
+
+function commentProgress() {
+  const level = getProgressLevel()
+  const lines = dinoSpeech.progress[level]
+  const message = lines[Math.floor(Math.random() * lines.length)]
+
+  const expression =
+    level === "almost" ? "win" : "happy"
+
+  dino.set(expression)
+  setSpeech(message)
 }
 
 function resetProgress() {
@@ -246,6 +319,13 @@ function showPhaseScreen({ text, button, expression, onConfirm }) {
   }
 }
 
+function getRandomChallenges(allChallenges, amount = 5) {
+  const shuffled = [...allChallenges]
+    .sort(() => Math.random() - 0.5)
+
+  return shuffled.slice(0, amount)
+}
+
 // =======================
 // MAPA
 // =======================
@@ -265,6 +345,10 @@ function startPhase() {
 
 function renderMap() {
   currentChallengeIndex = 0
+
+  if (completedLessons.length > 0) {
+    commentProgress()
+  }
 
   if (currentLessonIndex >= lessons.length) {
     setSpeech(dinoSpeech.map)
@@ -300,12 +384,14 @@ function renderMap() {
 // LIÇÃO
 // =======================
 function startLesson() {
+  currentChallengeIndex = 0
+  const lesson = lessons[currentLessonIndex]
+  activeChallenges = getRandomChallenges(lesson.challenges, 5)
   renderChallenge()
 }
 
 function renderChallenge() {
-  const lesson = lessons[currentLessonIndex]
-  const challenge = lesson.challenges[currentChallengeIndex]
+  const challenge = activeChallenges[currentChallengeIndex]
 
   dino.set("idle")
   setSpeech(lessons[currentLessonIndex].story)
@@ -329,7 +415,7 @@ function renderChallenge() {
 
 function checkAnswer(option) {
   const lesson = lessons[currentLessonIndex]
-  const challenge = lesson.challenges[currentChallengeIndex]
+  const challenge = activeChallenges[currentChallengeIndex]
   const feedback = document.getElementById("feedback")
 
   if (option === challenge.answer) {
@@ -343,7 +429,7 @@ function checkAnswer(option) {
 
     currentChallengeIndex++
 
-    if (currentChallengeIndex >= lesson.challenges.length) {
+    if (currentChallengeIndex >= activeChallenges.length) {
       xp += lesson.xp
 
       if (!completedLessons.includes(lesson.id)) {
@@ -363,7 +449,10 @@ function checkAnswer(option) {
       dino.set("win")
       showCongratsMessage(
         dinoSpeech.finishLesson,
-        startPhase
+        () => {
+          commentProgress()
+          setTimeout(startPhase, LONG_READ_TIME)
+        }
       )
     } else {
       showCongratsMessage(
