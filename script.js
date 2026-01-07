@@ -7,6 +7,7 @@ let currentChallengeIndex = 0
 let completedLessons =
   JSON.parse(localStorage.getItem("completedLessons")) || []
 let activeChallenges = []
+let collection = JSON.parse(localStorage.getItem("collection")) || []
 const sounds = {
   correct: new Audio("assets/sound-correct.mp3"),
   wrong: new Audio("assets/sound-wrong.mp3"),
@@ -18,6 +19,11 @@ const introScreen = document.getElementById("introScreen")
 const introText = document.getElementById("introText")
 const introBtn = document.getElementById("introBtn")
 const introDino = document.getElementById("introDino")
+const collectionScreen = document.getElementById("collectionScreen")
+const cardGrid = document.getElementById("cardGrid")
+const cardDetail = document.getElementById("cardDetail")
+
+document.getElementById("collectionBtn").onclick = openCollection
 
 // =======================
 // LIÇÕES — FASE 1 (DINO)
@@ -76,7 +82,7 @@ const dinoSpeech = {
 
 const lessons = [
   {
-    id: "dino_contar",
+    id: "contagem",
     title: "🦴 Contando fósseis",
     story: "Quantos ossos de dinossauro temos aqui 💜",
     challenges: [
@@ -94,7 +100,7 @@ const lessons = [
     xp: 15
   },
   {
-    id: "dino_soma",
+    id: "soma",
     title: "➕ Juntando fósseis",
     story: "Achei mais ossos de dinossauro, vamos juntar tudo!",
     challenges: [
@@ -112,7 +118,7 @@ const lessons = [
     xp: 20
   },
   {
-    id: "dino_subtracao",
+    id: "subtracao",
     title: "➖ Perdendo fósseis",
     story: "Ah não! Eu perdi alguns ossos de dinossauro!",
     challenges: [
@@ -130,7 +136,7 @@ const lessons = [
     xp: 20
   },
   {
-    id: "dino_multiplicacao",
+    id: "multiplicacao",
     title: "✖️ Ninho de ovos",
     story: "Olha que legal! Encontrei alguns ninhos de dinossauros! 🥚",
     challenges: [
@@ -148,7 +154,7 @@ const lessons = [
     xp: 25
   },
   {
-    id: "dino_divisao",
+    id: "divisao",
     title: "➗ Dividindo fósseis",
     story: "Humm, tem alguns ovos fora do ninho. Vamos colocar no lugar!",
     challenges: [
@@ -166,6 +172,43 @@ const lessons = [
     xp: 25
   }
 ]
+
+const cards = {
+  contagem: {
+    id: "t-rex",
+    title: "Tyrannosaurus Rex",
+    image: "assets/cards/t-rex.png",
+    fact: "O T-Rex tinha cerca de 60 dentes afiados. Vamos contar quantos aparecem na imagem!"
+  },
+
+  soma: {
+    id: "triceratops",
+    title: "Triceratops",
+    image: "assets/cards/triceratops.png",
+    fact: "O Triceratops tinha 3 chifres. Se juntarmos 2 Triceratops, quantos chifres teremos ao todo?"
+  },
+
+  subtracao: {
+    id: "stegosaurus",
+    title: "Stegosaurus",
+    image: "assets/cards/stegosaurus.png",
+    fact: "O Stegosaurus tinha 17 placas nas costas. Se 5 forem escondidas, quantas ainda podemos ver?"
+  },
+
+  multiplicacao: {
+    id: "velociraptor",
+    title: "Velociraptor",
+    image: "assets/cards/velociraptor.png",
+    fact: "Velociraptores caçavam em grupos de 4. Se houverem 3 grupos, quantos dinossauros são ao todo?"
+  },
+
+  divisao: {
+    id: "brachiosaurus",
+    title: "Brachiosaurus",
+    image: "assets/cards/brachiosaurus.png",
+    fact: "O Brachiosaurus podia comer até 400 kg de plantas por dia. Se dividir igualmente em 4 partes, quanto fica cada uma?"
+  }
+}
 
 // =======================
 // UTIL
@@ -205,6 +248,24 @@ function saveProgress() {
     "completedLessons",
     JSON.stringify(completedLessons)
   )
+  localStorage.setItem(
+    "collection",
+    JSON.stringify(collection)
+  )
+}
+
+function saveCollection() {
+  localStorage.setItem("collection", JSON.stringify(collection))
+}
+
+function rewardCard(lessonId) {
+  const card = cards[lessonId]
+  if (!card) return
+
+  if (!collection.find(c => c.id === card.id)) {
+    collection.push(card)
+    saveCollection()
+  }
 }
 
 function renderProgress() {
@@ -301,6 +362,7 @@ function resetProgress() {
     xp = 0
     currentLessonIndex = 0
     completedLessons = []
+    collection = []
     saveProgress()
     location.reload()
   }
@@ -324,6 +386,39 @@ function getRandomChallenges(allChallenges, amount = 5) {
     .sort(() => Math.random() - 0.5)
 
   return shuffled.slice(0, amount)
+}
+
+function openCollection() {
+  cardGrid.innerHTML = ""
+
+  collection.forEach(card => {
+    const el = document.createElement("div")
+    el.className = "card"
+    el.innerHTML = `
+      <img src="${card.image}">
+      <p>${card.title}</p>
+    `
+    el.onclick = () => showCard(card)
+    cardGrid.appendChild(el)
+  })
+
+  collectionScreen.style.display = "block"
+}
+
+function closeCollection() {
+  collectionScreen.style.display = "none"
+}
+
+function showCard(card) {
+  document.getElementById("cardImg").src = card.image
+  document.getElementById("cardTitle").textContent = card.title
+  document.getElementById("cardFact").textContent = card.fact
+
+  cardDetail.style.display = "flex"
+}
+
+function closeCard() {
+  cardDetail.style.display = "none"
 }
 
 // =======================
@@ -451,6 +546,7 @@ function checkAnswer(option) {
         dinoSpeech.finishLesson,
         () => {
           commentProgress()
+          rewardCard(lesson.id)
           setTimeout(startPhase, LONG_READ_TIME)
         }
       )

@@ -13,6 +13,7 @@
 
     <main id="app">
       <button id="menuToggle">☰</button>
+      <button id="collectionBtn">🃏 Coleção</button>
       <div id="progress"></div>
       <div id="phaseBar"></div>
       <div id="character">
@@ -29,8 +30,22 @@
         <button id="introBtn">Começar</button>
       </div>
     </section>
-  </div>
 
+    <section id="collectionScreen" class="hidden">
+      <h2>Minha Coleção</h2>
+      <div id="cardGrid"></div>
+      <button onclick="closeCollection()">Fechar</button>
+    </section>
+
+    <section id="cardDetail" class="hidden">
+      <div class="card">
+        <img id="cardImg">
+        <h3 id="cardTitle"></h3>
+        <p id="cardFact"></p>
+        <button onclick="closeCard()">Voltar</button>
+      </div>
+    </section>
+  </div>
 
   <script src="script.js"></script>
 </body>
