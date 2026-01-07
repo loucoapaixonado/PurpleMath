@@ -11,7 +11,8 @@ let collection = JSON.parse(localStorage.getItem("collection")) || []
 const sounds = {
   correct: new Audio("assets/sound-correct.mp3"),
   wrong: new Audio("assets/sound-wrong.mp3"),
-  transition: new Audio("assets/sound-transition.mp3")
+  transition: new Audio("assets/sound-transition.mp3"),
+  reward: new Audio("assets/sound-reward.mp3")
 }
 const READ_TIME = 1800 // ms → 1.8 segundos (ajuste se quiser)
 const LONG_READ_TIME = 2500 // ms → 2.5 segundos (ajuste se quiser)
@@ -22,6 +23,10 @@ const introDino = document.getElementById("introDino")
 const collectionScreen = document.getElementById("collectionScreen")
 const cardGrid = document.getElementById("cardGrid")
 const cardDetail = document.getElementById("cardDetail")
+const rewardOverlay = document.getElementById("rewardOverlay")
+const rewardImg = document.getElementById("rewardImg")
+const rewardTitle = document.getElementById("rewardTitle")
+const rewardBtn = document.getElementById("rewardBtn")
 
 document.getElementById("collectionBtn").onclick = openCollection
 
@@ -176,37 +181,37 @@ const lessons = [
 const cards = {
   contagem: {
     id: "t-rex",
-    title: "Tyrannosaurus Rex",
+    title: "Tiranossauro Rex",
     image: "assets/cards/t-rex.png",
-    fact: "O T-Rex tinha cerca de 60 dentes afiados. Vamos contar quantos aparecem na imagem!"
+    fact: "O T-Rex tinha cerca de 60 dentes afiados. É muito dente pra contar!"
   },
 
   soma: {
     id: "triceratops",
     title: "Triceratops",
     image: "assets/cards/triceratops.png",
-    fact: "O Triceratops tinha 3 chifres. Se juntarmos 2 Triceratops, quantos chifres teremos ao todo?"
+    fact: "O Triceratops tinha 3 chifres. Se juntássemos 2 Triceratops, teríamos 6 chifres!"
   },
 
   subtracao: {
     id: "stegosaurus",
-    title: "Stegosaurus",
+    title: "Estegossauro",
     image: "assets/cards/stegosaurus.png",
-    fact: "O Stegosaurus tinha 17 placas nas costas. Se 5 forem escondidas, quantas ainda podemos ver?"
+    fact: "O Estegossauro tinha 17 placas nas costas. Se 5 fossem escondidas, ele teria apenas 12!"
   },
 
   multiplicacao: {
     id: "velociraptor",
     title: "Velociraptor",
     image: "assets/cards/velociraptor.png",
-    fact: "Velociraptores caçavam em grupos de 4. Se houverem 3 grupos, quantos dinossauros são ao todo?"
+    fact: "Se Velociraptores caçavam em grupos de 4. Então 3 grupos teriam 12 deles!"
   },
 
   divisao: {
     id: "brachiosaurus",
-    title: "Brachiosaurus",
+    title: "Braquiossauro",
     image: "assets/cards/brachiosaurus.png",
-    fact: "O Brachiosaurus podia comer até 400 kg de plantas por dia. Se dividir igualmente em 4 partes, quanto fica cada uma?"
+    fact: "O Braquiossauro podia comer até 400 kg de plantas por dia. Se ele dividesse com três filhotes, cada um comeria 100 kg!"
   }
 }
 
@@ -421,6 +426,19 @@ function closeCard() {
   cardDetail.style.display = "none"
 }
 
+function showReward(card, callback) {
+  playSound("reward")
+  rewardImg.src = card.image
+  rewardTitle.textContent = card.title
+
+  rewardOverlay.style.display = "flex"
+
+  rewardBtn.onclick = () => {
+    rewardOverlay.style.display = "none"
+    if (callback) callback()
+  }
+}
+
 // =======================
 // MAPA
 // =======================
@@ -546,8 +564,13 @@ function checkAnswer(option) {
         dinoSpeech.finishLesson,
         () => {
           commentProgress()
+          const card = cards[lesson.id]
           rewardCard(lesson.id)
-          setTimeout(startPhase, LONG_READ_TIME)
+          if (card) {
+          showReward(card, () => setTimeout(startPhase, LONG_READ_TIME))
+          } else {
+            setTimeout(startPhase, LONG_READ_TIME)
+          }
         }
       )
     } else {
