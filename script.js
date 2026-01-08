@@ -1,11 +1,12 @@
 // =======================
+// PurpleMath - lógica principal do jogo
+// Arquivo: script.js
+// Responsabilidades: estado do jogo, fases, lições, progresso e UI
+// =======================
 // ESTADO GLOBAL
 // =======================
 let xp = Number(localStorage.getItem("xp")) || 0
-let currentLessonIndex = Number(localStorage.getItem("lessonIndex")) || 0
 let currentChallengeIndex = 0
-let completedLessons =
-  JSON.parse(localStorage.getItem("completedLessons")) || []
 let activeChallenges = []
 let collection = JSON.parse(localStorage.getItem("collection")) || []
 const sounds = {
@@ -28,17 +29,45 @@ const rewardImg = document.getElementById("rewardImg")
 const rewardTitle = document.getElementById("rewardTitle")
 const rewardBtn = document.getElementById("rewardBtn")
 
+window.addEventListener('load', () => {
+  // restaura progresso por fase (se houver)
+  Object.values(phases).forEach(phase => {
+    const saved = JSON.parse(localStorage.getItem(`progress-${phase.id}`))
+    if (saved) phase.progress = saved
+  })
+
+  // restaura a fase ativa (se salva) ou inicia em 'terra'
+  const savedPhaseId = localStorage.getItem('currentPhaseId')
+  if (savedPhaseId && phases[savedPhaseId]) {
+    currentPhase = phases[savedPhaseId]
+  } else {
+    currentPhase = phases.terra
+  }
+
+  // sincroniza guia e tema
+  setGuide(currentPhase.guide, currentPhase.guide)
+  document.body.className = currentPhase.theme
+
+  // render inicial
+  renderProgress()
+  renderPhaseBar()
+  renderSidebar()
+  enterPhase(currentPhase.id)
+})
+
 document.getElementById("collectionBtn").onclick = openCollection
 
 // =======================
 // LIÇÕES — FASE 1 (DINO)
 // =======================
-const dino = {
+let guide = {
+  name: "dino",
   img: document.getElementById("dinoImg"),
+  prefix: "dino",
   set(expression) {
-    this.img.src = `assets/dino-${expression}.png`
+    this.img.src = `assets/${this.prefix}-${expression}.png`
     this.img.classList.remove("dino-react")
-    void this.img.offsetWidth // restart animation
+    void this.img.offsetWidth
     this.img.classList.add("dino-react")
   }
 }
@@ -49,7 +78,7 @@ const dinoSpeech = {
     Eu vou te acompanhar nessa aventura pela matemática.
     Sei que sou um dragão, mas serei seu guia na ilha dos dinossauros hehehe.
     Vamos aprender juntos?
-    E também vamos ganhar uns coisas legais pelo caminho! 😉`,
+    E também vamos ganhar umas coisinhas legais pelo caminho! 😉`,
   map: "Que tal começar uma lição? 💜",
   correct: [
     "Issooo! Mandou muito bem ✨",
@@ -85,7 +114,26 @@ const dinoSpeech = {
     Preparada para a próxima aventura?`
 }
 
-const lessons = [
+const whaleSpeech = {
+  introPhase: `
+Olá... 🌊  
+Eu sou a Baleia Jubarte 🐋  
+No oceano, tudo tem ritmo, calma e profundidade.
+Vamos aprender matemática no nosso tempo?
+`,
+  correct: [
+    "Muito bem... você sentiu o ritmo 🌊",
+    "Excelente! Vamos seguir a corrente."
+  ],
+  wrong: [
+    "Tudo bem... vamos tentar de novo com calma.",
+    "Sem pressa. O oceano ensina paciência."
+  ],
+  finishLesson: "Você navegou muito bem por essa lição 🌊",
+  finishPhase: "Que jornada linda pelo oceano... Estou orgulhosa de você 🐋💜"
+}
+
+const terraLessons = [
   {
     id: "contagem",
     title: "🦴 Contando fósseis",
@@ -178,7 +226,24 @@ const lessons = [
   }
 ]
 
-const cards = {
+const oceanLessons = [
+  {
+    id: "comparacao",
+    title: "Quem é maior?",
+    story: "No oceano, tudo tem tamanho. Vamos comparar!",
+    xp: 60,
+    challenges: [ /* várias questões */ ]
+  },
+  {
+    id: "sequencias",
+    title: "Correntes do oceano",
+    story: "O oceano segue padrões. Vamos descobrir!",
+    xp: 70,
+    challenges: []
+  }
+]
+
+const terraCards = {
   contagem: {
     id: "t-rex",
     title: "Tiranossauro Rex",
@@ -211,9 +276,53 @@ const cards = {
     id: "brachiosaurus",
     title: "Braquiossauro",
     image: "assets/cards/brachiosaurus.png",
-    fact: "O Braquiossauro podia comer até 400 kg de plantas por dia. Se ele dividesse com três filhotes, cada um comeria 100 kg!"
+    fact: "O Braquiossauro podia comer até 400 kg de plantas por dia. Se ele dividisse com três filhotes, cada um comeria 100 kg!"
   }
 }
+
+const oceanCards = {
+  comparacao: {
+    id: "whale-jump",
+    title: "Salto da Jubarte",
+    image: "assets/cards/whale-jump.png",
+    fact: "As jubartes podem saltar completamente fora da água. Comparar números é entender quem é maior ou menor."
+  },
+  sequencias: {
+    id: "whale-song",
+    title: "Canção da Baleia",
+    image: "assets/cards/whale-song.png",
+    fact: "As jubartes cantam seguindo padrões. Sequências numéricas também seguem um ritmo."
+  }
+}
+
+const phases = {
+  terra: {
+    id: "terra",
+    name: "Terra 🦖",
+    theme: "terra-theme",
+    guide: "dino",
+    lessons: terraLessons,
+    cards: terraCards,
+    progress: {
+      completedLessons: [],
+      currentLessonIndex: 0
+    }
+  },
+
+  oceano: {
+    id: "oceano",
+    name: "Oceano 🐋",
+    theme: "ocean-theme",
+    guide: "whale",
+    lessons: oceanLessons,
+    cards: oceanCards,
+    progress: {
+      completedLessons: [],
+      currentLessonIndex: 0
+    }
+  }
+}
+let currentPhase = phases.terra
 
 // =======================
 // UTIL
@@ -229,6 +338,15 @@ function playSound(type) {
   sounds[type].currentTime = 0
   sounds[type].play()
 }
+
+function setGuide(name, prefix) {
+  guide.name = name
+  guide.prefix = prefix
+  // atualiza imagem do guia para expressão padrão (idle)
+  if (guide.img) {
+    guide.img.src = `assets/${guide.prefix}-idle.png`
+  }
+} 
 
 function setSpeech(text) {
   const speech = document.getElementById("speech")
@@ -248,11 +366,17 @@ function showCongratsMessage(message, callback) {
 
 function saveProgress() {
   localStorage.setItem("xp", xp)
-  localStorage.setItem("lessonIndex", currentLessonIndex)
+
+  // salva progresso da fase atual
   localStorage.setItem(
-    "completedLessons",
-    JSON.stringify(completedLessons)
+    `progress-${currentPhase.id}`,
+    JSON.stringify(currentPhase.progress)
   )
+
+  // salva fase ativa
+  localStorage.setItem("currentPhaseId", currentPhase.id)
+
+  // Coleção é global
   localStorage.setItem(
     "collection",
     JSON.stringify(collection)
@@ -264,7 +388,7 @@ function saveCollection() {
 }
 
 function rewardCard(lessonId) {
-  const card = cards[lessonId]
+  const card = (currentPhase.cards || {})[lessonId]
   if (!card) return
 
   if (!collection.find(c => c.id === card.id)) {
@@ -281,7 +405,8 @@ function renderProgress() {
 }
 
 function renderPhaseBar() {
-  const percent = (currentLessonIndex / lessons.length) * 100
+  const total = Math.max(1, currentPhase.lessons.length)
+  const percent = Math.round((currentPhase.progress.currentLessonIndex / total) * 100)
   document.getElementById("phaseBar").innerHTML = `
     <div style="
       background:#4c1d95;
@@ -296,28 +421,26 @@ function renderPhaseBar() {
         transition:0.4s;
       "></div>
     </div>
-    <small>🦖 Progresso da Ilha dos Dinossauros</small>
+    <small>${currentPhase.name} — Progresso</small>
   `
-}
+} 
 
 function renderSidebar() {
   const sidebar = document.getElementById("sidebar")
 
   sidebar.innerHTML = `
-    <h3>🦖 Fase 1: Dinosauros</h3>
-    ${lessons
+    <h3>${currentPhase.name}</h3>
+    ${currentPhase.lessons
       .map((lesson, index) => {
-        const isDone = completedLessons.includes(lesson.id)
-        const isLocked = index > currentLessonIndex
+        const isDone = currentPhase.progress.completedLessons.includes(lesson.id)
+        const isLocked = index > currentPhase.progress.currentLessonIndex
 
         return `
           <div
             class="lesson-item
               ${isDone ? "lesson-done" : ""}
               ${isLocked ? "lesson-locked" : ""}"
-            onclick="${
-              !isLocked ? `goToLesson(${index})` : ""
-            }"
+            onclick="${!isLocked ? `goToLesson(${index})` : ""}"
           >
             ${lesson.title}
             ${isDone ? " ✅" : ""}
@@ -330,10 +453,10 @@ function renderSidebar() {
       Redefinir Progresso
     </button>
   `
-}
+} 
 
 function goToLesson(index) {
-  currentLessonIndex = index
+  currentPhase.progress.currentLessonIndex = index
   currentChallengeIndex = 0
   saveProgress()
   startPhase()
@@ -341,8 +464,8 @@ function goToLesson(index) {
 }
 
 function getProgressLevel() {
-  const total = lessons.length
-  const done = completedLessons.length
+  const total = currentPhase.lessons.length
+  const done = currentPhase.progress.completedLessons.length
   const ratio = done / total
 
   if (ratio <= 0.34) return "start"
@@ -352,31 +475,65 @@ function getProgressLevel() {
 
 function commentProgress() {
   const level = getProgressLevel()
-  const lines = dinoSpeech.progress[level]
+  // usa as falas de progresso do guia atual quando disponíveis
+  const speechObj = currentPhase.id === 'terra' ? dinoSpeech : (currentPhase.id === 'oceano' ? whaleSpeech : dinoSpeech)
+  const lines = (speechObj.progress && speechObj.progress[level]) ? speechObj.progress[level] : (dinoSpeech.progress[level] || [])
+  if (!lines || !lines.length) return
   const message = lines[Math.floor(Math.random() * lines.length)]
 
-  const expression =
-    level === "almost" ? "win" : "happy"
+  const expression = level === "almost" ? "win" : "happy"
 
-  dino.set(expression)
+  guide.set(expression)
   setSpeech(message)
+}
+
+function savePhaseProgress() {
+  localStorage.setItem(
+    `progress-${currentPhase.id}`,
+    JSON.stringify(currentPhase.progress)
+  )
 }
 
 function resetProgress() {
   if (confirm("Tem certeza que deseja redefinir seu progresso? O jogo será reiniciado.")) {
     xp = 0
-    currentLessonIndex = 0
-    completedLessons = []
     collection = []
+    
+    // Reseta progresso de todas as fases
+    Object.values(phases).forEach(phase => {
+      phase.progress.completedLessons = []
+      phase.progress.currentLessonIndex = 0
+    })
+    
+    // Volta para a fase inicial
+    currentPhase = phases.terra
+    
     saveProgress()
     location.reload()
   }
 }
 
+/**
+ * Alterna para uma fase (por id) e sincroniza UI
+ */
+function enterPhase(phaseId) {
+  currentPhase = phases[phaseId]
+
+  document.body.className = currentPhase.theme
+  setGuide(currentPhase.guide, currentPhase.guide)
+
+  // atualiza a UI relacionada à fase
+  renderSidebar()
+  renderPhaseBar()
+  renderProgress()
+
+  startPhase()
+} 
+
 function showPhaseScreen({ text, button, expression, onConfirm }) {
   introText.textContent = text
   introBtn.textContent = button
-  introDino.src = `assets/dino-${expression}.png`
+  introDino.src = `assets/${guide.prefix}-${expression}.png`
 
   introScreen.style.display = "flex"
 
@@ -443,7 +600,7 @@ function showReward(card, callback) {
 // MAPA
 // =======================
 function startPhase() {
-  if (currentLessonIndex === 0) {
+  if (currentPhase.progress.currentLessonIndex === 0) {
     showPhaseScreen({
       text: dinoSpeech.introPhase,
       button: "Começar aventura",
@@ -459,36 +616,39 @@ function startPhase() {
 function renderMap() {
   currentChallengeIndex = 0
 
-  if (completedLessons.length > 0) {
+  if (currentPhase.progress.completedLessons.length > 0) {
     commentProgress()
   }
 
-  if (currentLessonIndex >= lessons.length) {
+  if (currentPhase.progress.currentLessonIndex >= currentPhase.lessons.length) {
     setSpeech(dinoSpeech.map)
     playSound("transition")
     document.getElementById("screen").className = "fade"
     document.getElementById("screen").innerHTML = `
-      <h2>🎉 FASE 1 COMPLETA! PARABÉNS 👏</h2>
-      <p>🦖 Spike está orgulhoso de você 💜</p>
-      <p>😄 Você é muito boa em fazer contas</p>
-      <p>🐋 Oceano desbloqueado em breve...</p>
+      <h2>🎉 ${currentPhase.name} COMPLETA! PARABÉNS 👏</h2>
+      <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : ''}</p>
     `
-    dino.set("win")
-    showPhaseScreen({
-      text: dinoSpeech.endPhase,
-      button: "Continuar",
-      expression: "win"
-    })
+    guide.set("win")
+    // permite transição para a próxima fase quando prevista (ex: terra -> oceano)
+    const nextPhaseId = currentPhase.id === 'terra' ? 'oceano' : null
+    if (nextPhaseId) {
+      showPhaseScreen({
+        text: currentPhase.id === 'terra' ? dinoSpeech.endPhase : (whaleSpeech.finishPhase || ''),
+        button: "Continuar",
+        expression: "win",
+        onConfirm: () => enterPhase(nextPhaseId)
+      })
+    }
     return
-  }
+  } 
 
-  dino.set("idle")
+  guide.set("idle")
   setSpeech(dinoSpeech.map)
   playSound("transition")
   document.getElementById("screen").className = "fade"
   document.getElementById("screen").innerHTML = `
-    <h2>🗺️ Ilha dos Dinossauros</h2>
-    <p>${lessons[currentLessonIndex].title}</p>
+    <h2>🗺️ ${currentPhase.name}</h2>
+    <p>${currentPhase.lessons[currentPhase.progress.currentLessonIndex].title}</p>
     <button onclick="startLesson()">Começar</button>
   `
 }
@@ -498,16 +658,23 @@ function renderMap() {
 // =======================
 function startLesson() {
   currentChallengeIndex = 0
-  const lesson = lessons[currentLessonIndex]
+  const lesson = currentPhase.lessons[currentPhase.progress.currentLessonIndex]
   activeChallenges = getRandomChallenges(lesson.challenges, 5)
   renderChallenge()
-}
+} 
 
 function renderChallenge() {
   const challenge = activeChallenges[currentChallengeIndex]
+  if (!challenge) {
+    // se não houver desafio (erro), volta para o mapa
+    startPhase()
+    return
+  }
 
-  dino.set("idle")
-  setSpeech(lessons[currentLessonIndex].story)
+  const lesson = currentPhase.lessons[currentPhase.progress.currentLessonIndex]
+
+  guide.set("idle")
+  setSpeech(lesson.story)
   document.getElementById("screen").className = "fade"
   document.getElementById("screen").innerHTML = `
     <h2>${challenge.question}</h2>
@@ -522,36 +689,48 @@ function renderChallenge() {
       )
       .join("")}
     </div>
-    <p id="feedback" style="margin-top:10px;"></p>
   `
-}
+} 
 
+/**
+ * Verifica resposta selecionada para o desafio atual.
+ * - Reproduz som e feedback
+ * - Avança para o próximo desafio ou conclui a lição
+ * - Atualiza XP, coleção e progresso da fase
+ */
 function checkAnswer(option) {
-  const lesson = lessons[currentLessonIndex]
+  const lessonIndex = currentPhase.progress.currentLessonIndex
+  const lesson = currentPhase.lessons[lessonIndex]
   const challenge = activeChallenges[currentChallengeIndex]
-  const feedback = document.getElementById("feedback")
+  if (!challenge) return
+
+  // escolhe o conjunto de falas dependendo do guia ativo
+  const speechSet = guide.name === 'whale' ? whaleSpeech : dinoSpeech
 
   if (option === challenge.answer) {
     playSound("correct")
-    dino.set("happy")
+    guide.set("happy")
     setSpeech(
-      dinoSpeech.correct[
-        Math.floor(Math.random() * dinoSpeech.correct.length)
+      speechSet.correct[
+        Math.floor(Math.random() * (speechSet.correct || dinoSpeech.correct).length)
       ]
     )
 
     currentChallengeIndex++
 
+    // terminou a série de desafios da lição
     if (currentChallengeIndex >= activeChallenges.length) {
       xp += lesson.xp
 
-      if (!completedLessons.includes(lesson.id)) {
-        completedLessons.push(lesson.id)
+      // marca como concluída (apenas uma vez)
+      if (!currentPhase.progress.completedLessons.includes(lesson.id)) {
+        currentPhase.progress.completedLessons.push(lesson.id)
       }
 
-      currentLessonIndex = Math.max(
-        currentLessonIndex,
-        lessons.findIndex(l => l.id === lesson.id) + 1
+      // avança para a próxima lição quando aplicável
+      currentPhase.progress.currentLessonIndex = Math.max(
+        currentPhase.progress.currentLessonIndex,
+        lessonIndex + 1
       )
 
       saveProgress()
@@ -559,44 +738,47 @@ function checkAnswer(option) {
       renderPhaseBar()
       renderSidebar()
 
-      dino.set("win")
+      guide.set("win")
+
+      // mensagem final e recompensa (se houver)
       showCongratsMessage(
-        dinoSpeech.finishLesson,
+        speechSet.finishLesson || dinoSpeech.finishLesson,
         () => {
           commentProgress()
-          const card = cards[lesson.id]
-          rewardCard(lesson.id)
+          const card = (currentPhase.cards || {})[lesson.id]
+
           if (card) {
-          showReward(card, () => setTimeout(startPhase, LONG_READ_TIME))
+            // mostra a recompensa; quando o usuário coletar, adicionamos à coleção
+            showReward(card, () => {
+              rewardCard(lesson.id)
+              saveProgress()
+              setTimeout(startPhase, LONG_READ_TIME)
+            })
           } else {
             setTimeout(startPhase, LONG_READ_TIME)
           }
         }
       )
     } else {
+      // acerto, continua para próximo desafio
       showCongratsMessage(
-        dinoSpeech.correct[
-          Math.floor(Math.random() * dinoSpeech.correct.length)
-        ],
+        speechSet.correct[Math.floor(Math.random() * speechSet.correct.length)],
         renderChallenge
       )
     }
   } else {
     playSound("wrong")
-    dino.set("sad")
+    guide.set("sad")
     setSpeech(
-      dinoSpeech.wrong[
-        Math.floor(Math.random() * dinoSpeech.wrong.length)
-      ]
+      speechSet.wrong[Math.floor(Math.random() * speechSet.wrong.length)]
     )
   }
-}
+} 
 
 // =======================
 // INICIALIZAÇÃO
 // =======================
-renderProgress()
-renderPhaseBar()
-renderSidebar()
-startPhase ()
+// A inicialização agora ocorre no handler de 'load' para garantir que o DOM e o localStorage
+// já estejam prontos antes de sincronizar o estado da aplicação.
+
 

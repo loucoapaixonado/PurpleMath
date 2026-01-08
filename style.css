@@ -6,6 +6,10 @@ body {
   padding-top: 20px;
 }
 
+.ocean-theme {
+  background: linear-gradient(160deg, #0ea5e9, #1e3a8a);
+}
+
 #sidebar {
   display: none;
   width: 220px;
