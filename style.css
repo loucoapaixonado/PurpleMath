@@ -6,16 +6,13 @@ body {
   padding-top: 20px;
 }
 
-.ocean-theme {
-  background: linear-gradient(160deg, #0ea5e9, #1e3a8a);
-}
-
 #sidebar {
   display: none;
   width: 220px;
   background: #2e1065;
   border-radius: 24px;
   padding: 16px;
+  overflow-y: auto;
 }
 
 #sidebar h3 {
@@ -31,6 +28,12 @@ body {
   width: 60%;
   z-index: 1000;
   box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+}
+
+.phase-item {
+  background: none !important;
+  font-size: larger;
+  margin: 15px 0;
 }
 
 #progress {
@@ -132,6 +135,15 @@ button:hover {
   width: 60px;
 }
 
+#resetBtn {
+  margin-top:20px; 
+  margin-bottom: 40px;
+  background:#f65c5c; 
+  font-size:14px; 
+  font-weight:normal; 
+  height:auto;
+}
+
 #character {
   display: flex;
   flex-direction: column;
@@ -205,6 +217,7 @@ button:hover {
   background: #1e1b2e;
   padding: 20px;
   z-index: 3000;
+  overflow-y: auto;
 }
 
 #cardGrid {

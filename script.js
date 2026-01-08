@@ -46,7 +46,6 @@ window.addEventListener('load', () => {
 
   // sincroniza guia e tema
   setGuide(currentPhase.guide, currentPhase.guide)
-  document.body.className = currentPhase.theme
 
   // render inicial
   renderProgress()
@@ -116,11 +115,12 @@ const dinoSpeech = {
 
 const whaleSpeech = {
   introPhase: `
-Olá... 🌊  
-Eu sou a Baleia Jubarte 🐋  
-No oceano, tudo tem ritmo, calma e profundidade.
-Vamos aprender matemática no nosso tempo?
-`,
+    Olá... 🌊  
+    Eu sou a Baleia Jubarte 🐋  
+    No oceano, tudo tem ritmo, calma e profundidade.
+    Vamos aprender matemática no nosso tempo?
+    `,
+  map: "Que tal começar uma lição? 💜",
   correct: [
     "Muito bem... você sentiu o ritmo 🌊",
     "Excelente! Vamos seguir a corrente."
@@ -129,8 +129,24 @@ Vamos aprender matemática no nosso tempo?
     "Tudo bem... vamos tentar de novo com calma.",
     "Sem pressa. O oceano ensina paciência."
   ],
+  progress: {
+    start: [
+      "Ei, você já começou! Isso é o mais importante 💜",
+      "Primeiro passo dado! Estou orgulhoso de você. ✨"
+    ],
+    middle: [
+      "Olha só quanto você já avançou! 🚀",
+      "Você está pegando o jeito, hein?",
+      "Tá vendo como matemática pode ser mais leve? 😄"
+    ],
+    almost: [
+      "Uau! Parabéns você chegou até o aqui! 🏁",
+      "Eu sabia que você ia conseguir! ✨",
+      "Você chegou muito longe, parabéns! 🎉"
+    ]
+  },
   finishLesson: "Você navegou muito bem por essa lição 🌊",
-  finishPhase: "Que jornada linda pelo oceano... Estou orgulhosa de você 🐋💜"
+  endPhase: "Que jornada linda pelo oceano... Estou orgulhosa de você 🐋💜"
 }
 
 const terraLessons = [
@@ -228,18 +244,69 @@ const terraLessons = [
 
 const oceanLessons = [
   {
-    id: "comparacao",
-    title: "Quem é maior?",
-    story: "No oceano, tudo tem tamanho. Vamos comparar!",
-    xp: 60,
-    challenges: [ /* várias questões */ ]
+    id: "fractions-intro",
+    title: "Partes do Oceano",
+    story: "Entendendo frações com a baleia jubarte",
+    challenges: [
+      {question: "A baleia comeu 1 de 2 cardumes iguais. Isso representa:",options: ["1/3", "1/2", "2/1"],answer: "1/2"},
+      {question: "Se o oceano fosse dividido em 4 partes iguais, uma parte seria:",options: ["1/2", "1/4", "4/1"],answer: "1/4"},
+      {question: "A jubarte nadou 3 partes de um total de 5. Qual fração?",options: ["3/5", "5/3", "2/5"],answer: "3/5"},
+      {question: "Qual fração representa metade de um coral?",options: ["1/3", "1/2", "2/4"],answer: "1/2"},
+      {question: "2 pedaços de um total de 8 peixes é:",options: ["2/8", "1/4", "4/8"],answer: "2/8"}
+    ],
+    xp: 50
   },
   {
-    id: "sequencias",
-    title: "Correntes do oceano",
-    story: "O oceano segue padrões. Vamos descobrir!",
-    xp: 70,
-    challenges: []
+    id: "fractions-equivalent",
+    title: "Frações Equivalentes",
+    story: "Porções diferentes, mesmo tamanho",
+    challenges: [
+      {question: "2/4 do oceano é o mesmo que:",options: ["1/2", "3/4", "4/2"],answer: "1/2"},
+      {question: "A jubarte nadou 3/6 do percurso. Isso equivale a:",options: ["1/2", "2/3", "6/3"],answer: "1/2"},
+      {question: "Qual é equivalente a 1/2?",options: ["2/4", "3/6", "4/8"],answer: "2/4"},
+      {question: "4/8 dos peixes é o mesmo que:",options: ["1/2", "1/4", "2/8"],answer: "1/2"},
+      {question: "Frações equivalentes representam:",options: ["Quantidades diferentes","O mesmo valor","Valores maiores"],answer: "O mesmo valor"}
+    ],
+    xp: 30
+  },
+  {
+    id: "decimal-intro",
+    title: "Decimais no Oceano",
+    story: "Frações em forma decimal",
+    challenges: [
+      {question: "1/2 em decimal é:",options: ["0.5", "0.2", "1.2"],answer: "0.5"},
+      {question: "A jubarte nadou 0.5 do percurso. Isso é:",options: ["1/4", "1/2", "2/5"],answer: "1/2"},
+      {question: "0.25 representa:",options: ["1/2", "1/4", "3/4"],answer: "1/4"},
+      {question: "Qual decimal representa metade?",options: ["0.2", "0.5", "0.75"],answer: "0.5"},
+      {question: "1/10 em decimal é:",options: ["0.1", "1.0", "0.01"],answer: "0.1"}
+    ],
+    xp: 40
+  },
+  {
+    id: "decimal-comparison",
+    title: "Comparando Decimais",
+    story: "Quem nadou mais?",
+    challenges: [
+      {question: "0.7 é maior que 0.5?",options: ["Sim", "Não"],answer: "Sim"},
+      {question: "Qual é maior?",options: ["0.3", "0.8", "0.5"],answer: "0.8"},
+      {question: "0.25 é menor que 0.5?",options: ["Sim", "Não"],answer: "Sim"},
+      {question: "Qual percurso é maior?",options: ["0.6", "0.4"],answer: "0.6"},
+      {question: "A jubarte nadou mais em:",options: ["0.9", "0.1"],answer: "0.9"}
+    ],
+    xp: 35
+  },
+  {
+    id: "fraction-decimal",
+    title: "Frações + Decimais",
+    story: "Traduzindo o oceano",
+    challenges: [
+      {question: "Qual fração representa 0.5?",options: ["1/2", "1/4", "2/5"],answer: "1/2"},
+      {question: "0.25 corresponde a:",options: ["1/4", "1/2", "3/4"],answer: "1/4"},
+      {question: "A jubarte nadou 3/4. Em decimal isso é:",options: ["0.75", "0.25", "0.5"],answer: "0.75"},
+      {question: "0.1 equivale a:",options: ["1/10", "1/2", "1/5"],answer: "1/10"},
+      {question: "Qual par está correto?",options: ["1/2 = 0.5", "1/4 = 0.4", "3/4 = 0.34"],answer: "1/2 = 0.5"}
+    ],
+    xp: 60
   }
 ]
 
@@ -281,17 +348,39 @@ const terraCards = {
 }
 
 const oceanCards = {
-  comparacao: {
-    id: "whale-jump",
-    title: "Salto da Jubarte",
-    image: "assets/cards/whale-jump.png",
-    fact: "As jubartes podem saltar completamente fora da água. Comparar números é entender quem é maior ou menor."
+  "fractions-intro": {
+    id: "jubarte-portion",
+    title: "Baleia Jubarte — Partes do Oceano",
+    image: "assets/cards/jubarte-1.png",
+    fact: "Uma jubarte pode passar metade do dia se alimentando. Metade = 1/2 = 0.5!"
   },
-  sequencias: {
-    id: "whale-song",
-    title: "Canção da Baleia",
-    image: "assets/cards/whale-song.png",
-    fact: "As jubartes cantam seguindo padrões. Sequências numéricas também seguem um ritmo."
+
+  "fractions-equivalent": {
+    id: "jubarte-equivalent",
+    title: "Baleia Jubarte — Mesmo Tamanho",
+    image: "assets/cards/jubarte-2.png",
+    fact: "2/4 do oceano é o mesmo que 1/2. A jubarte não liga para a forma, mas para a quantidade!"
+  },
+
+  "decimal-intro": {
+    id: "jubarte-decimal",
+    title: "Baleia Jubarte — Medidas Precisas",
+    image: "assets/cards/jubarte-3.png",
+    fact: "Cientistas usam decimais para medir o tempo e distância que a jubarte nada no oceano."
+  },
+
+  "decimal-comparison": {
+    id: "jubarte-compare",
+    title: "Baleia Jubarte — Quem Nadou Mais?",
+    image: "assets/cards/jubarte-4.png",
+    fact: "0.8 é maior que 0.5. A jubarte sempre escolhe o maior caminho quando quer explorar!"
+  },
+  
+  "fraction-decimal": {
+    id: "jubarte-translate",
+    title: "Baleia Jubarte — Dois Mundos",
+    image: "assets/cards/jubarte-5.png",
+    fact: "Frações e decimais são só duas formas diferentes de mostrar a mesma coisa no oceano."
   }
 }
 
@@ -299,7 +388,6 @@ const phases = {
   terra: {
     id: "terra",
     name: "Terra 🦖",
-    theme: "terra-theme",
     guide: "dino",
     lessons: terraLessons,
     cards: terraCards,
@@ -312,7 +400,6 @@ const phases = {
   oceano: {
     id: "oceano",
     name: "Oceano 🐋",
-    theme: "ocean-theme",
     guide: "whale",
     lessons: oceanLessons,
     cards: oceanCards,
@@ -367,11 +454,13 @@ function showCongratsMessage(message, callback) {
 function saveProgress() {
   localStorage.setItem("xp", xp)
 
-  // salva progresso da fase atual
-  localStorage.setItem(
-    `progress-${currentPhase.id}`,
-    JSON.stringify(currentPhase.progress)
-  )
+  // salva progresso de todas as fases (garante que resetProgress persista corretamente)
+  Object.values(phases).forEach(phase => {
+    localStorage.setItem(
+      `progress-${phase.id}`,
+      JSON.stringify(phase.progress)
+    )
+  })
 
   // salva fase ativa
   localStorage.setItem("currentPhaseId", currentPhase.id)
@@ -425,31 +514,51 @@ function renderPhaseBar() {
   `
 } 
 
+function isPhaseUnlocked(phaseId) {
+  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa
+  if (phaseId === 'terra') return true
+  if (phaseId === 'oceano') return phases.terra.progress.currentLessonIndex >= phases.terra.lessons.length
+  return true
+}
+
 function renderSidebar() {
   const sidebar = document.getElementById("sidebar")
 
   sidebar.innerHTML = `
-    <h3>${currentPhase.name}</h3>
-    ${currentPhase.lessons
-      .map((lesson, index) => {
-        const isDone = currentPhase.progress.completedLessons.includes(lesson.id)
-        const isLocked = index > currentPhase.progress.currentLessonIndex
+    <h3>Fases</h3>
+    ${Object.keys(phases)
+      .map(phaseId => {
+        const phase = phases[phaseId]
+        const unlocked = isPhaseUnlocked(phaseId)
+        const isActive = currentPhase && currentPhase.id === phaseId
 
         return `
-          <div
-            class="lesson-item
-              ${isDone ? "lesson-done" : ""}
-              ${isLocked ? "lesson-locked" : ""}"
-            onclick="${!isLocked ? `goToLesson(${index})` : ""}"
-          >
-            ${lesson.title}
-            ${isDone ? " ✅" : ""}
-            ${isLocked ? " 🔒" : ""}
+          <div class="phase-item ${isActive ? 'lesson-done' : ''} ${unlocked ? '' : 'lesson-locked'}" onclick="${unlocked ? `enterPhase('${phaseId}')` : ''}">
+            ${phase.name} ${isActive ? ' ✅' : ''} ${unlocked ? '' : ' 🔒'}
+          </div>
+
+          <div class="phase-lessons">
+            ${phase.lessons
+              .map((lesson, index) => {
+                const isDone = phase.progress.completedLessons.includes(lesson.id)
+                const isLockedLesson = index > phase.progress.currentLessonIndex
+                const finalLocked = !unlocked || isLockedLesson
+
+                return `
+                  <div class="lesson-item ${isDone ? 'lesson-done' : ''} ${finalLocked ? 'lesson-locked' : ''}" onclick="${!finalLocked ? `enterPhase('${phaseId}'); goToLesson(${index})` : ''}">
+                    ${lesson.title}
+                    ${isDone ? ' ✅' : ''}
+                    ${finalLocked ? ' 🔒' : ''}
+                  </div>
+                `
+              })
+              .join("")}
           </div>
         `
       })
       .join("")}
-    <button onclick="resetProgress()" style="margin-top:20px; background:#f65c5c; font-size:14px; font-weight:normal; height:auto;">
+
+    <button onclick="resetProgress()" id="resetBtn">
       Redefinir Progresso
     </button>
   `
@@ -519,13 +628,16 @@ function resetProgress() {
 function enterPhase(phaseId) {
   currentPhase = phases[phaseId]
 
-  document.body.className = currentPhase.theme
   setGuide(currentPhase.guide, currentPhase.guide)
 
   // atualiza a UI relacionada à fase
   renderSidebar()
   renderPhaseBar()
   renderProgress()
+
+  // persiste a fase atual para evitar que, ao recarregar,
+  // a tela de conclusão da fase anterior seja exibida
+  saveProgress()
 
   startPhase()
 } 
@@ -600,9 +712,11 @@ function showReward(card, callback) {
 // MAPA
 // =======================
 function startPhase() {
+  const speechSet = currentPhase.id === 'oceano' ? whaleSpeech : dinoSpeech
+
   if (currentPhase.progress.currentLessonIndex === 0) {
     showPhaseScreen({
-      text: dinoSpeech.introPhase,
+      text: speechSet.introPhase,
       button: "Começar aventura",
       expression: "idle",
       onConfirm: renderMap
@@ -611,9 +725,10 @@ function startPhase() {
     introScreen.style.display = "none"
     renderMap()
   }
-}
+} 
 
 function renderMap() {
+  const speechSet = currentPhase.id === 'oceano' ? whaleSpeech : dinoSpeech
   currentChallengeIndex = 0
 
   if (currentPhase.progress.completedLessons.length > 0) {
@@ -621,7 +736,7 @@ function renderMap() {
   }
 
   if (currentPhase.progress.currentLessonIndex >= currentPhase.lessons.length) {
-    setSpeech(dinoSpeech.map)
+    setSpeech(speechSet.map)
     playSound("transition")
     document.getElementById("screen").className = "fade"
     document.getElementById("screen").innerHTML = `
@@ -643,7 +758,7 @@ function renderMap() {
   } 
 
   guide.set("idle")
-  setSpeech(dinoSpeech.map)
+  setSpeech(speechSet.map)
   playSound("transition")
   document.getElementById("screen").className = "fade"
   document.getElementById("screen").innerHTML = `
@@ -682,7 +797,7 @@ function renderChallenge() {
     ${challenge.options
       .map(
         opt => `
-        <button onclick="checkAnswer(${opt})">
+        <button onclick='checkAnswer(${JSON.stringify(opt)})'>
           ${opt}
         </button>
       `
@@ -748,12 +863,20 @@ function checkAnswer(option) {
           const card = (currentPhase.cards || {})[lesson.id]
 
           if (card) {
-            // mostra a recompensa; quando o usuário coletar, adicionamos à coleção
-            showReward(card, () => {
-              rewardCard(lesson.id)
-              saveProgress()
+            // mostra a recompensa somente se ainda não foi coletada
+            const alreadyCollected = collection.find(c => c.id === card.id)
+            if (!alreadyCollected) {
+              // mostra a recompensa; quando o usuário coletar, adicionamos à coleção
+              showReward(card, () => {
+                rewardCard(lesson.id)
+                saveProgress()
+                setTimeout(startPhase, LONG_READ_TIME)
+              })
+            } else {
+              // já coletado — informa e volta ao mapa sem mostrar overlay
+              setSpeech("Você já coletou essa figurinha! 🎉")
               setTimeout(startPhase, LONG_READ_TIME)
-            })
+            }
           } else {
             setTimeout(startPhase, LONG_READ_TIME)
           }
