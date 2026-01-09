@@ -823,6 +823,13 @@ const koreaCards = {
     title: "Yoongi — Gráficos Contam Histórias",
     image: "assets/cards/yoongi-5.png",
     fact: "Cada gráfico conta uma história diferente sobre os números! 📈💙"
+  },
+
+  "legendary": {
+    id: "yoongi-legendary",
+    title: "✨ Yoongi Lendário ✨",
+    image: "assets/cards/yoongi-legendary.png",
+    fact: "Você conquistou o conhecimento máximo em lógica e estrutura! Uma versão lendária do Yoongi celebra sua jornada 💙✨"
   }
 }
 
@@ -1194,6 +1201,48 @@ function showReward(card, callback) {
   }
 }
 
+function showGameCompletion() {
+  playSound("reward")
+  
+  const legendaryCard = koreaCards.legendary
+  
+  // Mostra tela de parabéns do Yoongi
+  setSpeech(`Parabéns! Você completou todas as fases e dominou a jornada matemática inteira! 🎉 Você é incrível pequena ✨`)
+  guide.set("win")
+  
+  // Aguarda um pouco para mostrar a figurinha
+  setTimeout(() => {
+    // Cria overlay especial para a figurinha lendária
+    const completionOverlay = document.createElement('div')
+    completionOverlay.id = 'completionOverlay'
+    completionOverlay.className = 'completion-overlay'
+    completionOverlay.innerHTML = `
+      <div class="legendary-card-container">
+        <h2>✨ FIGURINHA LENDÁRIA ✨</h2>
+        <div class="legendary-card-3d">
+          <div class="legendary-card-face legendary-card-front" style="background-image: url('${legendaryCard.image}')"></div>
+          <div class="legendary-card-face legendary-card-back"></div>
+        </div>
+        <h3>${legendaryCard.title}</h3>
+        <p>${legendaryCard.fact}</p>
+        <button onclick="closeLegendaryCard()">Coletar e Finalizar</button>
+      </div>
+    `
+    document.body.appendChild(completionOverlay)
+    
+    // Adiciona a figurinha à coleção
+    if (!collection.find(c => c.id === legendaryCard.id)) {
+      collection.push(legendaryCard)
+      saveCollection()
+    }
+  }, LONG_READ_TIME)
+}
+
+function closeLegendaryCard() {
+  const overlay = document.getElementById('completionOverlay')
+  if (overlay) overlay.remove()
+}
+
 // =======================
 // MAPA
 // =======================
@@ -1235,9 +1284,8 @@ function renderMap() {
     playSound("transition")
     document.getElementById("screen").className = "fade"
     document.getElementById("screen").innerHTML = `
-      <h2>🎉 ${currentPhase.name} COMPLETA! PARABÉNS 👏</h2>
-      <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : (guide.name === 'spider' ? '🕷️ Homem-Aranha salvou Nova York com você! 💙' : (guide.name === 'tiana' ? '👑 Princesa Tiana realizou seu sonho! 💚' : ''))}</p>
-    `
+      <button onclick="enterPhase('terra'); goToLesson(0)">Voltar ao início</button>
+      `
     guide.set("win")
     // permite transição para a próxima fase quando prevista (ex: terra -> oceano -> newyork -> neworleans -> korea)
     let nextPhaseId = null
@@ -1259,6 +1307,9 @@ function renderMap() {
         expression: "win",
         onConfirm: () => enterPhase(nextPhaseId)
       })
+    } else if (currentPhase.id === 'korea') {
+      // Última fase - mostra tela final com figurinha lendária
+      setTimeout(() => showGameCompletion(), LONG_READ_TIME)
     }
     return
   } 
