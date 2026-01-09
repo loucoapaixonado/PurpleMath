@@ -149,6 +149,43 @@ const whaleSpeech = {
   endPhase: "Que jornada linda pelo oceano... Estou orgulhosa de você 🐋💜"
 }
 
+const spidermanSpeech = {
+  introPhase: `
+    Ei! Eu sou o Homem-Aranha! 🕷️💙  
+    Em Nova York, preciso calcular tudo: distâncias, ângulos, formas!
+    Vamos aprender geometria enquanto salvo a cidade?
+    Com grandes poderes vem grande matemática! 💪`,
+  map: "Que tal começar mais uma aventura? 🕷️",
+  correct: [
+    "Excelente! Você é um herói! 💙",
+    "Isso aí! Teia perfeita! 🕸️",
+    "Muito bem! Nova York precisa de você!"
+  ],
+  wrong: [
+    "Tente de novo, herói! 🕷️",
+    "Errou, mas você consegue!",
+    "Sem problema, estou aqui com você!"
+  ],
+  progress: {
+    start: [
+      "Ótimo! Você começou sua jornada heróica! 💙",
+      "Primeiro passo para se tornar um grande herói!"
+    ],
+    middle: [
+      "Olha só como você está aprendendo! 🕸️",
+      "Você está ficando rápido como uma aranha!",
+      "Nova York vê seu progresso!"
+    ],
+    almost: [
+      "Quase lá, herói! 🎯",
+      "Você é incrível! 🦸",
+      "Parabéns! Você está salvando o dia! 🌃"
+    ]
+  },
+  finishLesson: "Lição completada! Você é um gênio! 🕷️💙",
+  endPhase: "Parabéns, herói! Você conquistou Nova York! 🌃✨"
+}
+
 const terraLessons = [
   {
     id: "contagem",
@@ -310,6 +347,74 @@ const oceanLessons = [
   }
 ]
 
+const newyorkLessons = [
+  {
+    id: "discounts",
+    title: "Descontos em NY",
+    story: "Lojas oferecem descontos e o herói precisa calcular rápido.",
+    challenges: [
+      { question: "Um item de 100 com 50% de desconto custa:", options: [50, 75, 25], answer: 50 },
+      { question: "20% de desconto significa pagar:", options: ["80%", "20%", "100%"], answer: "80%" },
+      { question: "Um ingresso de 200 com 25% off vira:", options: [150, 175, 100], answer: 150 },
+      { question: "10% de 50 é:", options: [5, 10, 15], answer: 5 },
+      { question: "Metade do preço é:", options: ["50%", "25%", "75%"], answer: "50%" }
+    ],
+    xp: 10
+  },
+  {
+    id: "shapes-intro",
+    title: "Formas de Nova York",
+    story: "Os prédios de Nova York têm muitas formas!",
+    challenges: [
+      {question: "Um prédio tem 4 lados iguais e 4 ângulos retos. É um:",options: ["Triângulo", "Quadrado", "Círculo"],answer: "Quadrado"},
+      {question: "Quantos lados tem um triângulo?",options: ["3", "4", "5"],answer: "3"},
+      {question: "Um círculo tem quantos vértices?",options: ["0", "1", "∞"],answer: "0"},
+      {question: "Um pentágono tem quantos lados?",options: ["4", "5", "6"],answer: "5"},
+      {question: "Qual forma tem 6 lados iguais?",options: ["Quadrado", "Triângulo", "Hexágono"],answer: "Hexágono"}
+    ],
+    xp: 50
+  },
+  {
+    id: "perimeter",
+    title: "Perímetro das Ruas",
+    story: "Homem-Aranha precisa medir as ruas de Nova York!",
+    challenges: [
+      {question: "Um quadrado tem lado de 5m. Qual é o perímetro?",options: ["10m", "15m", "20m"],answer: "20m"},
+      {question: "Um retângulo tem 6m de comprimento e 4m de largura. Perímetro?",options: ["10m", "20m", "24m"],answer: "20m"},
+      {question: "Um triângulo com lados 3, 4 e 5. Perímetro?",options: ["7", "9", "12"],answer: "12"},
+      {question: "Um quadrado com perímetro 16m tem lado de:",options: ["2m", "4m", "8m"],answer: "4m"},
+      {question: "Um retângulo 8m x 2m tem perímetro de:",options: ["10m", "16m", "20m"],answer: "20m"}
+    ],
+    xp: 55
+  },
+  {
+    id: "area",
+    title: "Área dos Prédios",
+    story: "Calculando o espaço dos prédios para proteger!",
+    challenges: [
+      {question: "Um quadrado com lado 5m tem área de:",options: ["10m²", "20m²", "25m²"],answer: "25m²"},
+      {question: "Um retângulo 6m x 4m tem área de:",options: ["10m²", "24m²", "48m²"],answer: "24m²"},
+      {question: "Um triângulo com base 8m e altura 6m tem área de:",options: ["14m²", "24m²", "48m²"],answer: "24m²"},
+      {question: "Um quadrado com área 36m² tem lado de:",options: ["4m", "6m", "9m"],answer: "6m"},
+      {question: "Um retângulo 10m x 5m tem área de:",options: ["15m²", "30m²", "50m²"],answer: "50m²"}
+    ],
+    xp: 60
+  },
+  {
+    id: "angles",
+    title: "Ângulos nas Construções",
+    story: "Os ângulos dos prédios ajudam Homem-Aranha a se mover!",
+    challenges: [
+      {question: "Quantos graus tem um ângulo reto?",options: ["45°", "90°", "180°"],answer: "90°"},
+      {question: "Quanto é a soma dos ângulos de um triângulo?",options: ["90°", "180°", "360°"],answer: "180°"},
+      {question: "Quanto é a soma dos ângulos de um quadrado?",options: ["180°", "270°", "360°"],answer: "360°"},
+      {question: "Um ângulo agudo é menor que:",options: ["45°", "90°", "180°"],answer: "90°"},
+      {question: "Dois ângulos retos formam um ângulo de:",options: ["90°", "180°", "270°"],answer: "180°"}
+    ],
+    xp: 55
+  }
+]
+
 const terraCards = {
   contagem: {
     id: "t-rex",
@@ -384,6 +489,43 @@ const oceanCards = {
   }
 }
 
+const newyorkCards = {
+  "discount": {
+    id: "spider-discount",
+    title: "Descontos Urbanos",
+    image: "assets/cards/spiderman-1.png",
+    fact: "Calcular descontos rápido é essencial até para heróis no dia a dia."
+  },
+
+  "shapes-intro": {
+    id: "spider-shapes",
+    title: "Homem-Aranha — Formas de Nova York",
+    image: "assets/cards/spiderman-2.png",
+    fact: "Os prédios de Nova York têm formas incríveis! Quadrados, retângulos e muito mais!"
+  },
+
+  "perimeter": {
+    id: "spider-perimeter",
+    title: "Homem-Aranha — Perímetro das Ruas",
+    image: "assets/cards/spiderman-3.png",
+    fact: "Para passar pelas ruas de Nova York, Homem-Aranha calcula o perímetro de cada quarteirão!"
+  },
+
+  "area": {
+    id: "spider-area",
+    title: "Homem-Aranha — Área dos Prédios",
+    image: "assets/cards/spiderman-4.png",
+    fact: "A área do teto de um prédio é crucial para o Homem-Aranha pousar com segurança! 🕷️"
+  },
+
+  "angles": {
+    id: "spider-angles",
+    title: "Homem-Aranha — Ângulos nas Construções",
+    image: "assets/cards/spiderman-5.png",
+    fact: "Os ângulos ajudam o Homem-Aranha a calcular o melhor caminho entre prédios!"
+  }
+}
+
 const phases = {
   terra: {
     id: "terra",
@@ -403,6 +545,18 @@ const phases = {
     guide: "whale",
     lessons: oceanLessons,
     cards: oceanCards,
+    progress: {
+      completedLessons: [],
+      currentLessonIndex: 0
+    }
+  },
+
+  newyork: {
+    id: "newyork",
+    name: "Nova York 🕷️",
+    guide: "spider",
+    lessons: newyorkLessons,
+    cards: newyorkCards,
     progress: {
       completedLessons: [],
       currentLessonIndex: 0
@@ -515,9 +669,10 @@ function renderPhaseBar() {
 } 
 
 function isPhaseUnlocked(phaseId) {
-  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa
+  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa; 'newyork' quando 'oceano' completa
   if (phaseId === 'terra') return true
   if (phaseId === 'oceano') return phases.terra.progress.currentLessonIndex >= phases.terra.lessons.length
+  if (phaseId === 'newyork') return phases.oceano.progress.currentLessonIndex >= phases.oceano.lessons.length
   return true
 }
 
@@ -585,7 +740,10 @@ function getProgressLevel() {
 function commentProgress() {
   const level = getProgressLevel()
   // usa as falas de progresso do guia atual quando disponíveis
-  const speechObj = currentPhase.id === 'terra' ? dinoSpeech : (currentPhase.id === 'oceano' ? whaleSpeech : dinoSpeech)
+  let speechObj = dinoSpeech
+  if (currentPhase.id === 'oceano') speechObj = whaleSpeech
+  if (currentPhase.id === 'newyork') speechObj = spidermanSpeech
+  
   const lines = (speechObj.progress && speechObj.progress[level]) ? speechObj.progress[level] : (dinoSpeech.progress[level] || [])
   if (!lines || !lines.length) return
   const message = lines[Math.floor(Math.random() * lines.length)]
@@ -712,7 +870,9 @@ function showReward(card, callback) {
 // MAPA
 // =======================
 function startPhase() {
-  const speechSet = currentPhase.id === 'oceano' ? whaleSpeech : dinoSpeech
+  let speechSet = dinoSpeech
+  if (currentPhase.id === 'oceano') speechSet = whaleSpeech
+  if (currentPhase.id === 'newyork') speechSet = spidermanSpeech
 
   if (currentPhase.progress.currentLessonIndex === 0) {
     showPhaseScreen({
@@ -728,7 +888,10 @@ function startPhase() {
 } 
 
 function renderMap() {
-  const speechSet = currentPhase.id === 'oceano' ? whaleSpeech : dinoSpeech
+  let speechSet = dinoSpeech
+  if (currentPhase.id === 'oceano') speechSet = whaleSpeech
+  if (currentPhase.id === 'newyork') speechSet = spidermanSpeech
+  
   currentChallengeIndex = 0
 
   if (currentPhase.progress.completedLessons.length > 0) {
@@ -741,14 +904,20 @@ function renderMap() {
     document.getElementById("screen").className = "fade"
     document.getElementById("screen").innerHTML = `
       <h2>🎉 ${currentPhase.name} COMPLETA! PARABÉNS 👏</h2>
-      <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : ''}</p>
+      <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : (guide.name === 'spider' ? '🕷️ Homem-Aranha salvou Nova York com você! 💙' : '')}</p>
     `
     guide.set("win")
-    // permite transição para a próxima fase quando prevista (ex: terra -> oceano)
-    const nextPhaseId = currentPhase.id === 'terra' ? 'oceano' : null
+    // permite transição para a próxima fase quando prevista (ex: terra -> oceano -> newyork)
+    let nextPhaseId = null
+    if (currentPhase.id === 'terra') nextPhaseId = 'oceano'
+    else if (currentPhase.id === 'oceano') nextPhaseId = 'newyork'
+    
     if (nextPhaseId) {
+      let endPhaseText = dinoSpeech.endPhase
+      if (currentPhase.id === 'oceano') endPhaseText = whaleSpeech.endPhase
+      
       showPhaseScreen({
-        text: currentPhase.id === 'terra' ? dinoSpeech.endPhase : (whaleSpeech.finishPhase || ''),
+        text: endPhaseText,
         button: "Continuar",
         expression: "win",
         onConfirm: () => enterPhase(nextPhaseId)
@@ -820,7 +989,9 @@ function checkAnswer(option) {
   if (!challenge) return
 
   // escolhe o conjunto de falas dependendo do guia ativo
-  const speechSet = guide.name === 'whale' ? whaleSpeech : dinoSpeech
+  let speechSet = dinoSpeech
+  if (guide.name === 'whale') speechSet = whaleSpeech
+  if (guide.name === 'spider') speechSet = spidermanSpeech
 
   if (option === challenge.answer) {
     playSound("correct")
