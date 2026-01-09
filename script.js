@@ -983,14 +983,12 @@ function renderPhaseBar() {
   const percent = Math.round((currentPhase.progress.currentLessonIndex / total) * 100)
   document.getElementById("phaseBar").innerHTML = `
     <div style="
-      background:#4c1d95;
       border-radius:12px;
       overflow:hidden;
       margin:10px 0;
     ">
       <div style="
         width:${percent}%;
-        background:#a855f7;
         padding:6px;
         transition:0.4s;
       "></div>
@@ -1089,6 +1087,18 @@ function commentProgress() {
   setSpeech(message)
 }
 
+function applyPhaseTheme(phaseId) {
+  // remove todas as classes de tema
+  document.body.classList.remove('theme-terra', 'theme-oceano', 'theme-newyork', 'theme-neworleans', 'theme-korea')
+  
+  // adiciona a classe de tema correspondente à fase
+  if (phaseId === 'terra') document.body.classList.add('theme-terra')
+  else if (phaseId === 'oceano') document.body.classList.add('theme-oceano')
+  else if (phaseId === 'newyork') document.body.classList.add('theme-newyork')
+  else if (phaseId === 'neworleans') document.body.classList.add('theme-neworleans')
+  else if (phaseId === 'korea') document.body.classList.add('theme-korea')
+}
+
 function savePhaseProgress() {
   localStorage.setItem(
     `progress-${currentPhase.id}`,
@@ -1122,6 +1132,9 @@ function enterPhase(phaseId) {
   currentPhase = phases[phaseId]
 
   setGuide(currentPhase.guide, currentPhase.guide)
+
+  // aplica o tema de cores da fase
+  applyPhaseTheme(phaseId)
 
   // atualiza a UI relacionada à fase
   renderSidebar()

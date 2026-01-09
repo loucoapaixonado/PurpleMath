@@ -1,18 +1,60 @@
+/* TEMAS DE CORES POR FASE */
 body {
-  background: #2a0a4a;
+  background: var(--theme-dark);
   color: white;
   font-family: Arial, sans-serif;
   justify-content: center;
   padding-top: 20px;
+  transition: background 0.6s ease;
+}
+
+/* TEMA TERRA - Tons quentes, marrom e verde */
+body.theme-terra {
+  --theme-primary: #92400e;
+  --theme-secondary: #b45309;
+  --theme-dark: #3f2817;
+  --theme-accent: #d97706;
+}
+
+/* TEMA OCEANO - Azuis e turquesa */
+body.theme-oceano {
+  --theme-primary: #0369a1;
+  --theme-secondary: #0891b2;
+  --theme-dark: #0c2d48;
+  --theme-accent: #06b6d4;
+}
+
+/* TEMA NOVA YORK - Roxo/Azul escuro urbano */
+body.theme-newyork {
+  --theme-primary: #4338ca;
+  --theme-secondary: #6366f1;
+  --theme-dark: #1f2937;
+  --theme-accent: #818cf8;
+}
+
+/* TEMA NOVA ORLEANS - Ouro, verde quente e roxo */
+body.theme-neworleans {
+  --theme-primary: #b45309;
+  --theme-secondary: #d97706;
+  --theme-dark: #451a03;
+  --theme-accent: #fcd34d;
+}
+
+/* TEMA COREIA - Azul cyan/moderno e roxo */
+body.theme-korea {
+  --theme-primary: #7c3aed;
+  --theme-secondary: #a855f7;
+  --theme-dark: #2a0a4a;
+  --theme-accent: #6d28d9;
 }
 
 #sidebar {
   display: none;
   width: 220px;
-  background: #2e1065;
-  border-radius: 24px;
+  background: var(--theme-dark);
   padding: 16px;
   overflow-y: auto;
+  transition: background 0.6s ease;
 }
 
 #sidebar h3 {
@@ -40,6 +82,14 @@ body {
   text-align: center;
 }
 
+#phaseBar div {
+  background: var(--theme-primary);
+}
+
+#phaseBar div div {
+  background: var(--theme-accent);
+}
+
 #menuToggle {
   position: fixed;
   top: 10px;
@@ -47,7 +97,8 @@ body {
   z-index: 1100;
   width: 50px;
   height: 50px;
-  background: #7c3aed;
+  background: var(--theme-primary);
+  transition: background 0.6s ease;
   border: none;
   color: white;
   font-size: 20px;
@@ -62,7 +113,8 @@ body {
   left: 10px;
   width: 50px;
   height: 50px;
-  background: #7c3aed;
+  background: var(--theme-primary);
+  transition: background 0.6s ease;
   border: none;
   color: white;
   font-size: 20px;
@@ -77,12 +129,12 @@ body {
   margin-bottom: 8px;
   border-radius: 14px;
   cursor: pointer;
-  background: #4c1d95;
+  background: rgba(0,0,0,0.2);
   transition: 0.2s;
 }
 
 .lesson-item:hover {
-  background: #6d28d9;
+  background: var(--theme-secondary);
 }
 
 .lesson-item:active {
@@ -90,7 +142,7 @@ body {
 }
 
 .lesson-done {
-  background: #7c3aed;
+  background: var(--theme-primary);
 }
 
 .lesson-locked {
@@ -99,9 +151,10 @@ body {
 }
 
 #app {
-  background: #3b1160;
+  background: rgba(0,0,0,0.2);
   padding: 20px;
   border-radius: 24px;
+  transition: background 0.6s ease;
 }
 
 button {
@@ -109,7 +162,7 @@ button {
   width: 100%;
   height: 60px;
   touch-action: manipulation;
-  background: #7c3aed;
+  background: var(--theme-primary);
   border: none;
   color: white;
   padding: 12px;
@@ -117,10 +170,11 @@ button {
   font-size: 25px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background: #8b5cf6;
+  background: var(--theme-secondary);
 }
 
 #optionsButons {
@@ -156,7 +210,7 @@ button:hover {
 
 #character img {
   width: 250px;
-  border: 5px solid blueviolet;
+  border: 5px solid var(--theme-primary);
   border-radius: 20px;
   animation: float 3s ease-in-out infinite;
 }
@@ -166,13 +220,14 @@ button:hover {
 }
 
 #speech {
-  background: #6d28d9;
+  background: var(--theme-accent);
   padding: 10px 14px;
   border-radius: 16px;
   max-width: 220px;
   font-size: 14px;
   line-height: 1.4;
   margin-top: 30px;
+  transition: background 0.6s ease;
 }
 
 /* TRANSIÇÕES DE TELA */
@@ -188,7 +243,7 @@ button:hover {
 #introScreen {
   position: fixed;
   inset: 0;
-  background: linear-gradient(160deg, #6d28d9, #a855f7);
+  background: linear-gradient(160deg, var(--theme-accent), var(--theme-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,7 +252,6 @@ button:hover {
 }
 
 #introScreen .card {
-  background: #1e1b2e;
   padding: 24px;
   border-radius: 18px;
   text-align: center;
@@ -217,7 +271,7 @@ button:hover {
 #collectionScreen {
   position: fixed;
   inset: 0;
-  background: #1e1b2e;
+  background: var(--theme-dark);
   padding: 20px;
   z-index: 3000;
   overflow-y: auto;
@@ -231,7 +285,7 @@ button:hover {
 }
 
 .card {
-  background: #2a2540;
+  background: var(--theme-accent);
   border-radius: 14px;
   padding: 10px;
   text-align: center;
@@ -253,7 +307,7 @@ button:hover {
 #cardDetail {
   position: fixed;
   inset: 0;
-  background: #1e1b2e;
+  background: var(--theme-dark);
   display: none;
   align-items: center;
   justify-content: center;
@@ -276,7 +330,7 @@ button:hover {
 }
 
 .reward-card {
-  background: linear-gradient(160deg, #7c3aed, #a855f7);
+  background: linear-gradient(160deg, var(--theme-primary), var(--theme-secondary));
   border-radius: 22px;
   padding: 20px;
   text-align: center;
