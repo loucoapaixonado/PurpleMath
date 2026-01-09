@@ -223,6 +223,44 @@ const tianaSpeech = {
     Isso é poder de verdade ✨`
 }
 
+const yoongiSpeech = {
+  introPhase: `Annyeong 💙  
+    Eu sou o Yoongi 🎵  
+    Em Seul, aprendemos que tudo tem uma lógica, um padrão, uma estrutura.  
+    Vamos explorar o mundo através de lógica, padrões, funções e gráficos?`,
+  map: "Que tal resolver um desafio de lógica? 💙",
+  correct: [
+    "Excelente! Sua lógica está perfeita! 🧠",
+    "Muito bem! Você viu o padrão! 🔍",
+    "Perfeito! Suas funções estão corretas! ⚙️"
+  ],
+  wrong: [
+    "Tente novamente, o padrão está lá. 🤔",
+    "Respire e pense com calma… 💙",
+    "Está quase! Observe a sequência novamente."
+  ],
+  progress: {
+    start: [
+      "Você começou sua jornada pela lógica! 💙",
+      "Primeiro passo na estrutura! Vamos lá!"
+    ],
+    middle: [
+      "Seus padrões estão ficando mais claros! 🔍",
+      "Você entende a lógica agora! Continue assim 💪",
+      "Os gráficos começam a fazer sentido, né?"
+    ],
+    almost: [
+      "Quase dominando a lógica! 🎵",
+      "Seus cálculos estão impecáveis! ✨",
+      "Você é uma máquina de processar padrões! 🤖"
+    ]
+  },
+  finishLesson: "Lição completa! Sua lógica é brilhante! 💙",
+  endPhase: `Parabéns! 🎉  
+    Você dominou a lógica, os padrões, as funções e os gráficos.  
+    Agora você vê o mundo através de estruturas matemáticas! 💙✨`
+}
+
 const terraLessons = [
   {
     id: "contagem",
@@ -520,6 +558,89 @@ const neworleansLessons = [
   }
 ]
 
+const koreaLessons = [
+  {
+    id: "logic-intro",
+    title: "Introdução à Lógica",
+    story: "Em Seul, aprendemos a pensar logicamente desde pequenos!",
+    challenges: [
+      { question: "Se A é verdadeiro e B é verdadeiro, A e B é:", options: ["Falso", "Verdadeiro", "Desconhecido"], answer: "Verdadeiro" },
+      { question: "Se A é verdadeiro e B é falso, A ou B é:", options: ["Verdadeiro", "Falso", "Talvez"], answer: "Verdadeiro" },
+      { question: "Não (verdadeiro) é:", options: ["Verdadeiro", "Falso", "Ambos"], answer: "Falso" },
+      { question: "Se chover, levo guarda-chuva. Não levei guarda-chuva. Logo:", options: ["Choveu", "Não choveu", "Talvez chova"], answer: "Não choveu" },
+      { question: "Todos os gatos são animais. Miau é um gato. Logo, Miau é:", options: ["Um gato", "Um animal", "Feliz"], answer: "Um animal" }
+    ],
+    xp: 50
+  },
+  {
+    id: "patterns",
+    title: "Descobrindo Padrões",
+    story: "Os padrões estão em toda parte! Você consegue vê-los?",
+    challenges: [
+      { question: "Qual número vem depois? 2, 4, 6, 8, ?", options: [9, 10, 12], answer: 10 },
+      { question: "Qual número vem depois? 1, 1, 2, 3, 5, 8, ?", options: [10, 12, 13], answer: 13 },
+      { question: "Qual número vem depois? 100, 90, 80, 70, ?", options: [60, 50, 40], answer: 60 },
+      { question: "Qual padrão você vê? 5, 10, 15, 20, ?", options: ["Somas de 5", "Múltiplos de 5", "Números aleatórios"], answer: "Múltiplos de 5" },
+      { question: "Qual letra vem depois? A, C, E, G, ?", options: ["H", "I", "J"], answer: "I" },
+      { question: "Complete a sequência: 2, 4, 6, ?", options: [8, 10, 7], answer: 8 },
+      { question: "Qual é o padrão?", options: ["+2", "+3", "x2"], answer: "+2" },
+      { question: "10, 20, 30 segue qual lógica?", options: ["+10", "+5", "x2"], answer: "+10" },
+      { question: "Sequências ajudam a:", options: ["Prever", "Confundir", "Ignorar"], answer: "Prever" },
+      { question: "Reconhecer padrões melhora:", options: ["Raciocínio", "Erro", "Pressa"], answer: "Raciocínio" }
+    ],
+    xp: 55
+  },
+  {
+    id: "simple-functions",
+    title: "Funções Simples",
+    story: "Funções são como máquinas que transformam entradas em saídas!",
+    challenges: [
+      { question: "Em uma função, a entrada gera:", options: ["Saída", "Erro", "Nada"], answer: "Saída" },
+      { question: "x = 2 → f(x) = 4 significa:", options: ["Dobrou", "Dividiu", "Zerou"], answer: "Dobrou" },
+      { question: "Funções representam:", options: ["Relações", "Confusão", "Aleatoriedade"], answer: "Relações" },
+      { question: "Tabela ajuda a ver:", options: ["Padrão", "Erro", "Nada"], answer: "Padrão" },
+      { question: "Função simples é:", options: ["Previsível", "Caótica", "Impossível"], answer: "Previsível" },
+      { question: "Se f(x) = x + 5, quanto é f(3)?", options: [5, 8, 10], answer: 8 },
+      { question: "Se f(x) = 2x, quanto é f(4)?", options: [6, 8, 10], answer: 8 },
+      { question: "Se f(x) = x², quanto é f(3)?", options: [6, 9, 12], answer: 9 },
+      { question: "Se f(x) = x - 2, quanto é f(7)?", options: [5, 7, 9], answer: 5 },
+      { question: "Se f(x) = 3x + 1, quanto é f(2)?", options: [6, 7, 8], answer: 7 }
+    ],
+    xp: 60
+  },
+  {
+    id: "sequences",
+    title: "Sequências Numéricas",
+    story: "Toda sequência tem uma regra. Você consegue encontrá-la?",
+    challenges: [
+      { question: "Qual é o 6º termo? 2, 4, 6, 8, 10, ?", options: [12, 14, 16], answer: 12 },
+      { question: "Qual é o 5º termo? 1, 4, 9, 16, ?", options: [20, 25, 30], answer: 25 },
+      { question: "Qual é o próximo? 1, 10, 100, 1000, ?", options: [2000, 10000, 100000], answer: 10000 },
+      { question: "Qual é o padrão? 2, 6, 12, 20, ?", options: ["n(n+1)", "n²", "2n"], answer: "n(n+1)" },
+      { question: "Qual é o 4º termo? 1, 2, 4, ?", options: [6, 8, 16], answer: 8 }
+    ],
+    xp: 65
+  },
+  {
+    id: "basic-graphs",
+    title: "Gráficos Básicos",
+    story: "Os gráficos mostram a história dos números!",
+    challenges: [
+      { question: "Gráfico mostra:", options: ["Variação", "Texto", "Erro"], answer: "Variação" },
+      { question: "Eixo horizontal é:", options: ["x", "y", "z"], answer: "x" },
+      { question: "Eixo vertical é:", options: ["y", "x", "0"], answer: "y" },
+      { question: "Gráficos ajudam a:", options: ["Visualizar", "Confundir", "Ignorar"], answer: "Visualizar" },
+      { question: "Linha crescente indica:", options: ["Aumento", "Queda", "Erro"], answer: "Aumento" },
+      { question: "Um gráfico crescente significa que:", options: ["Os valores diminuem", "Os valores aumentam", "Os valores permanecem iguais"], answer: "Os valores aumentam" },
+      { question: "Um gráfico com forma de ∧ é chamado:", options: ["Linear", "Quadrático", "Exponencial"], answer: "Quadrático" },
+      { question: "A reta y = 2x passa pela origem? ", options: ["Sim", "Não", "Talvez"], answer: "Sim" },
+      { question: "Se x aumenta e y aumenta proporcionalmente, é uma relação:", options: ["Linear", "Inversa", "Constante"], answer: "Linear" },
+      { question: "O ponto (0,0) é chamado de:", options: ["Vértice", "Origem", "Assíntota"], answer: "Origem" }
+    ],
+    xp: 70
+  }
+]
+
 const terraCards = {
   contagem: {
     id: "t-rex",
@@ -668,6 +789,43 @@ const neworleansCards = {
   }
 }
 
+const koreaCards = {
+  "logic-intro": {
+    id: "yoongi-logic",
+    title: "Yoongi — Lógica é Tudo",
+    image: "assets/cards/yoongi-1.png",
+    fact: "A lógica é a base de toda a matemática e programação! 💙🧠"
+  },
+
+  "patterns": {
+    id: "yoongi-patterns",
+    title: "Yoongi — Padrões em Tudo",
+    image: "assets/cards/yoongi-2.png",
+    fact: "Natureza, música, código... tudo tem padrões! 🎵🔍"
+  },
+
+  "simple-functions": {
+    id: "yoongi-functions",
+    title: "Yoongi — Máquinas Matemáticas",
+    image: "assets/cards/yoongi-3.png",
+    fact: "Funções transformam entradas em saídas de forma previsível! ⚙️💙"
+  },
+
+  "sequences": {
+    id: "yoongi-sequences",
+    title: "Yoongi — Sequências Perfeitas",
+    image: "assets/cards/yoongi-4.png",
+    fact: "Uma sequência bem estruturada revela a beleza da matemática! 📊✨"
+  },
+
+  "basic-graphs": {
+    id: "yoongi-graphs",
+    title: "Yoongi — Gráficos Contam Histórias",
+    image: "assets/cards/yoongi-5.png",
+    fact: "Cada gráfico conta uma história diferente sobre os números! 📈💙"
+  }
+}
+
 const phases = {
   terra: {
     id: "terra",
@@ -711,6 +869,18 @@ const phases = {
     guide: "tiana",
     lessons: neworleansLessons,
     cards: neworleansCards,
+    progress: {
+      completedLessons: [],
+      currentLessonIndex: 0
+    }
+  },
+
+  korea: {
+    id: "korea",
+    name: "Coreia 💙",
+    guide: "yoongi",
+    lessons: koreaLessons,
+    cards: koreaCards,
     progress: {
       completedLessons: [],
       currentLessonIndex: 0
@@ -823,11 +993,12 @@ function renderPhaseBar() {
 } 
 
 function isPhaseUnlocked(phaseId) {
-  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa; 'newyork' quando 'oceano' completa; 'neworleans' quando 'newyork' completa
+  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa; 'newyork' quando 'oceano' completa; 'neworleans' quando 'newyork' completa; 'korea' quando 'neworleans' completa
   if (phaseId === 'terra') return true
   if (phaseId === 'oceano') return phases.terra.progress.currentLessonIndex >= phases.terra.lessons.length
   if (phaseId === 'newyork') return phases.oceano.progress.currentLessonIndex >= phases.oceano.lessons.length
   if (phaseId === 'neworleans') return phases.newyork.progress.currentLessonIndex >= phases.newyork.lessons.length
+  if (phaseId === 'korea') return phases.neworleans.progress.currentLessonIndex >= phases.neworleans.lessons.length
   return true
 }
 
@@ -899,6 +1070,7 @@ function commentProgress() {
   if (currentPhase.id === 'oceano') speechObj = whaleSpeech
   if (currentPhase.id === 'newyork') speechObj = spidermanSpeech
   if (currentPhase.id === 'neworleans') speechObj = tianaSpeech
+  if (currentPhase.id === 'korea') speechObj = yoongiSpeech
   
   const lines = (speechObj.progress && speechObj.progress[level]) ? speechObj.progress[level] : (dinoSpeech.progress[level] || [])
   if (!lines || !lines.length) return
@@ -1030,6 +1202,7 @@ function startPhase() {
   if (currentPhase.id === 'oceano') speechSet = whaleSpeech
   if (currentPhase.id === 'newyork') speechSet = spidermanSpeech
   if (currentPhase.id === 'neworleans') speechSet = tianaSpeech
+  if (currentPhase.id === 'korea') speechSet = yoongiSpeech
 
   if (currentPhase.progress.currentLessonIndex === 0) {
     showPhaseScreen({
@@ -1049,6 +1222,7 @@ function renderMap() {
   if (currentPhase.id === 'oceano') speechSet = whaleSpeech
   if (currentPhase.id === 'newyork') speechSet = spidermanSpeech
   if (currentPhase.id === 'neworleans') speechSet = tianaSpeech
+  if (currentPhase.id === 'korea') speechSet = yoongiSpeech
   
   currentChallengeIndex = 0
 
@@ -1065,16 +1239,19 @@ function renderMap() {
       <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : (guide.name === 'spider' ? '🕷️ Homem-Aranha salvou Nova York com você! 💙' : (guide.name === 'tiana' ? '👑 Princesa Tiana realizou seu sonho! 💚' : ''))}</p>
     `
     guide.set("win")
-    // permite transição para a próxima fase quando prevista (ex: terra -> oceano -> newyork -> neworleans)
+    // permite transição para a próxima fase quando prevista (ex: terra -> oceano -> newyork -> neworleans -> korea)
     let nextPhaseId = null
     if (currentPhase.id === 'terra') nextPhaseId = 'oceano'
     else if (currentPhase.id === 'oceano') nextPhaseId = 'newyork'
     else if (currentPhase.id === 'newyork') nextPhaseId = 'neworleans'
+    else if (currentPhase.id === 'neworleans') nextPhaseId = 'korea'
     
     if (nextPhaseId) {
       let endPhaseText = dinoSpeech.endPhase
       if (currentPhase.id === 'oceano') endPhaseText = whaleSpeech.endPhase
       if (currentPhase.id === 'newyork') endPhaseText = spidermanSpeech.endPhase
+      if (currentPhase.id === 'neworleans') endPhaseText = tianaSpeech.endPhase
+      if (currentPhase.id === 'korea') endPhaseText = yoongiSpeech.endPhase
       
       showPhaseScreen({
         text: endPhaseText,
@@ -1153,6 +1330,7 @@ function checkAnswer(option) {
   if (guide.name === 'whale') speechSet = whaleSpeech
   if (guide.name === 'spider') speechSet = spidermanSpeech
   if (guide.name === 'tiana') speechSet = tianaSpeech
+  if (guide.name === 'yoongi') speechSet = yoongiSpeech
 
   if (option === challenge.answer) {
     playSound("correct")
