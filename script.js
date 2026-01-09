@@ -186,6 +186,43 @@ const spidermanSpeech = {
   endPhase: "Parabéns, herói! Você conquistou Nova York! 🌃✨"
 }
 
+const tianaSpeech = {
+  introPhase: `Oi! Que alegria te ver aqui 💚  
+    Meu sonho sempre foi construir algo com esforço, planejamento e dedicação.  
+    Vamos aprender a usar a matemática para cuidar do dinheiro e realizar sonhos.`,
+  map: "Que tal começar mais um desafio? 👑",
+  correct: [
+    "Muito bem! Esse é o tipo de decisão inteligente que constrói sonhos ✨",
+    "Perfeito! Planejar assim é pensar no futuro.",
+    "Excelente escolha! Você está mandando muito bem 💜"
+  ],
+  wrong: [
+    "Tudo bem errar, faz parte do aprendizado 🌱",
+    "Respira… vamos pensar juntas com calma.",
+    "Não desiste! Toda conquista começa com tentativa."
+  ],
+  progress: {
+    start: [
+      "Estamos começando, e você já deu o primeiro passo!",
+      "Todo sonho começa pequeno, mas começa."
+    ],
+    middle: [
+      "Você já avançou bastante! Seu planejamento está melhorando.",
+      "Metade do caminho feito! Continue firme 💪",
+      "Seu controle financeiro está ficando afiado!"
+    ],
+    almost: [
+      "Quase lá! Seus sonhos estão bem próximos!",
+      "Últimos ajustes antes da grande conquista ✨",
+      "Você está pronta para alcançar seus objetivos!"
+    ]
+  },
+  finishLesson: "Mais um passo rumo ao seu sonho 💜",
+  endPhase: `Parabéns!  
+    Você aprendeu a cuidar do dinheiro, planejar gastos e pensar no futuro.  
+    Isso é poder de verdade ✨`
+}
+
 const terraLessons = [
   {
     id: "contagem",
@@ -415,6 +452,74 @@ const newyorkLessons = [
   }
 ]
 
+const neworleansLessons = [
+  {
+    id: "profit-loss",
+    title: "Lucro e Prejuízo",
+    story: "No meu restaurante, preciso calcular o lucro de cada prato!",
+    challenges: [
+      { question: "Um prato custa 20 pra fazer e é vendido por 50. Qual o lucro?", options: [20, 30, 70], answer: 30 },
+      { question: "Se gastei 100 e ganhei 150, meu lucro foi:", options: [50, 100, 250], answer: 50 },
+      { question: "Um item custa 80 pra fazer. Vendo por 120. Lucro?", options: [40, 80, 200], answer: 40 },
+      { question: "Gasto 60 e vendo por 100. Meu lucro é:", options: [40, 60, 160], answer: 40 },
+      { question: "Se perdi 30 reais, meu prejuízo é:", options: [-30, 30, 60], answer: -30 }
+    ],
+    xp: 50
+  },
+  {
+    id: "profit-margin",
+    title: "Margem de Lucro",
+    story: "Qual percentual de lucro tenho em cada venda?",
+    challenges: [
+      { question: "Custa 100, vendo por 150. Margem de lucro?", options: ["30%", "50%", "150%"], answer: "50%" },
+      { question: "Custa 50, vendo por 100. Qual a margem?", options: ["50%", "100%", "200%"], answer: "100%" },
+      { question: "Custa 80, vendo por 120. Margem?", options: ["50%", "40%", "150%"], answer: "50%" },
+      { question: "Um produto com 20% de margem sobre 200 custa:", options: [160, 180, 240], answer: 160 },
+      { question: "Custa 200, vendo por 250. Margem?", options: ["25%", "50%", "125%"], answer: "25%" }
+    ],
+    xp: 55
+  },
+  {
+    id: "restaurant-layout",
+    title: "Layout do Restaurante",
+    story: "Preciso organizar meu restaurante com geometria!",
+    challenges: [
+      { question: "Meu restaurante é retangular: 10m x 8m. Qual a área?", options: ["18m²", "36m²", "80m²"], answer: "80m²" },
+      { question: "Se divido em 4 seções iguais, cada uma tem:", options: ["20m²", "40m²", "80m²"], answer: "20m²" },
+      { question: "Uma mesa quadrada tem lado de 1.5m. Perímetro?", options: ["3m", "4.5m", "6m"], answer: "6m" },
+      { question: "Tenho espaço de 12m² pra mesas de 2m² cada. Quantas cabem?", options: [4, 6, 12], answer: 6 },
+      { question: "Um espaço de 200m² dividido em 5 áreas tem:", options: ["40m² cada", "50m² cada", "100m² cada"], answer: "40m² cada" }
+    ],
+    xp: 60
+  },
+  {
+    id: "ingredient-cost",
+    title: "Custo dos Ingredientes",
+    story: "Calculando o custo de cada ingrediente no meu prato!",
+    challenges: [
+      { question: "Um ingrediente custa 10 pra 2 porções. Custo por porção?", options: [3, 5, 20], answer: 5 },
+      { question: "Frango sai 30 o kg. Um prato com 150g custa:", options: [4.5, 5, 45], answer: 4.5 },
+      { question: "Se 1kg custa 20, quanto custa 500g?", options: [5, 10, 40], answer: 10 },
+      { question: "3 ingredientes de 8 cada no prato. Custo total?", options: [8, 16, 24], answer: 24 },
+      { question: "Ingredientes custam 15. Vendo por 45. Lucro?", options: [15, 30, 60], answer: 30 }
+    ],
+    xp: 55
+  },
+  {
+    id: "financial-planning",
+    title: "Planejamento Financeiro",
+    story: "Vamos planejar o mês da minha loja!",
+    challenges: [
+      { question: "Ganho 1000 por dia. Em 30 dias ganho:", options: [30000, 1000, 3000], answer: 30000 },
+      { question: "Se tenho despesa de 15000 e receita de 25000, lucro?", options: [10000, 15000, 40000], answer: 10000 },
+      { question: "Preciso de 500 pra conta, 300 pra comida, 200 pra outros. Total?", options: [500, 800, 1000], answer: 1000 },
+      { question: "Se gasto 2000 e ganho 3500, meu lucro é:", options: [1500, 2000, 5500], answer: 1500 },
+      { question: "10% de 5000 em lucro significa:", options: [50, 500, 4500], answer: 500 }
+    ],
+    xp: 65
+  }
+]
+
 const terraCards = {
   contagem: {
     id: "t-rex",
@@ -490,7 +595,7 @@ const oceanCards = {
 }
 
 const newyorkCards = {
-  "discount": {
+  "discounts": {
     id: "spider-discount",
     title: "Descontos Urbanos",
     image: "assets/cards/spiderman-1.png",
@@ -526,6 +631,43 @@ const newyorkCards = {
   }
 }
 
+const neworleansCards = {
+  "profit-loss": {
+    id: "tiana-profit",
+    title: "Princesa Tiana — Lucro e Prejuízo",
+    image: "assets/cards/tiana-1.png",
+    fact: "Saber calcular o lucro é essencial para um restaurante prosperar! 💰"
+  },
+
+  "profit-margin": {
+    id: "tiana-margin",
+    title: "Princesa Tiana — Margem de Lucro",
+    image: "assets/cards/tiana-2.png",
+    fact: "Uma boa margem de lucro garante o sucesso financeiro do negócio! 📈"
+  },
+
+  "restaurant-layout": {
+    id: "tiana-layout",
+    title: "Princesa Tiana — Layout Perfeito",
+    image: "assets/cards/tiana-3.png",
+    fact: "A geometria ajuda a organizar o restaurante de forma eficiente! 🎨"
+  },
+
+  "ingredient-cost": {
+    id: "tiana-ingredients",
+    title: "Princesa Tiana — Custo dos Ingredientes",
+    image: "assets/cards/tiana-4.png",
+    fact: "Calcular o custo de cada ingrediente é a chave para pratos lucrativos! 🍳"
+  },
+
+  "financial-planning": {
+    id: "tiana-planning",
+    title: "Princesa Tiana — Gestora Financeira",
+    image: "assets/cards/tiana-5.png",
+    fact: "Com planejamento financeiro, qualquer sonho é possível! 👑✨"
+  }
+}
+
 const phases = {
   terra: {
     id: "terra",
@@ -557,6 +699,18 @@ const phases = {
     guide: "spider",
     lessons: newyorkLessons,
     cards: newyorkCards,
+    progress: {
+      completedLessons: [],
+      currentLessonIndex: 0
+    }
+  },
+
+  neworleans: {
+    id: "neworleans",
+    name: "Nova Orleans 👑",
+    guide: "tiana",
+    lessons: neworleansLessons,
+    cards: neworleansCards,
     progress: {
       completedLessons: [],
       currentLessonIndex: 0
@@ -669,10 +823,11 @@ function renderPhaseBar() {
 } 
 
 function isPhaseUnlocked(phaseId) {
-  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa; 'newyork' quando 'oceano' completa
+  // regra simples: 'terra' sempre desbloqueada; 'oceano' desbloqueada quando 'terra' completa; 'newyork' quando 'oceano' completa; 'neworleans' quando 'newyork' completa
   if (phaseId === 'terra') return true
   if (phaseId === 'oceano') return phases.terra.progress.currentLessonIndex >= phases.terra.lessons.length
   if (phaseId === 'newyork') return phases.oceano.progress.currentLessonIndex >= phases.oceano.lessons.length
+  if (phaseId === 'neworleans') return phases.newyork.progress.currentLessonIndex >= phases.newyork.lessons.length
   return true
 }
 
@@ -743,6 +898,7 @@ function commentProgress() {
   let speechObj = dinoSpeech
   if (currentPhase.id === 'oceano') speechObj = whaleSpeech
   if (currentPhase.id === 'newyork') speechObj = spidermanSpeech
+  if (currentPhase.id === 'neworleans') speechObj = tianaSpeech
   
   const lines = (speechObj.progress && speechObj.progress[level]) ? speechObj.progress[level] : (dinoSpeech.progress[level] || [])
   if (!lines || !lines.length) return
@@ -873,6 +1029,7 @@ function startPhase() {
   let speechSet = dinoSpeech
   if (currentPhase.id === 'oceano') speechSet = whaleSpeech
   if (currentPhase.id === 'newyork') speechSet = spidermanSpeech
+  if (currentPhase.id === 'neworleans') speechSet = tianaSpeech
 
   if (currentPhase.progress.currentLessonIndex === 0) {
     showPhaseScreen({
@@ -891,6 +1048,7 @@ function renderMap() {
   let speechSet = dinoSpeech
   if (currentPhase.id === 'oceano') speechSet = whaleSpeech
   if (currentPhase.id === 'newyork') speechSet = spidermanSpeech
+  if (currentPhase.id === 'neworleans') speechSet = tianaSpeech
   
   currentChallengeIndex = 0
 
@@ -904,17 +1062,19 @@ function renderMap() {
     document.getElementById("screen").className = "fade"
     document.getElementById("screen").innerHTML = `
       <h2>🎉 ${currentPhase.name} COMPLETA! PARABÉNS 👏</h2>
-      <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : (guide.name === 'spider' ? '🕷️ Homem-Aranha salvou Nova York com você! 💙' : '')}</p>
+      <p>${guide.name === 'dino' ? '🦖 Spike está orgulhoso de você 💜' : (guide.name === 'spider' ? '🕷️ Homem-Aranha salvou Nova York com você! 💙' : (guide.name === 'tiana' ? '👑 Princesa Tiana realizou seu sonho! 💚' : ''))}</p>
     `
     guide.set("win")
-    // permite transição para a próxima fase quando prevista (ex: terra -> oceano -> newyork)
+    // permite transição para a próxima fase quando prevista (ex: terra -> oceano -> newyork -> neworleans)
     let nextPhaseId = null
     if (currentPhase.id === 'terra') nextPhaseId = 'oceano'
     else if (currentPhase.id === 'oceano') nextPhaseId = 'newyork'
+    else if (currentPhase.id === 'newyork') nextPhaseId = 'neworleans'
     
     if (nextPhaseId) {
       let endPhaseText = dinoSpeech.endPhase
       if (currentPhase.id === 'oceano') endPhaseText = whaleSpeech.endPhase
+      if (currentPhase.id === 'newyork') endPhaseText = spidermanSpeech.endPhase
       
       showPhaseScreen({
         text: endPhaseText,
@@ -992,6 +1152,7 @@ function checkAnswer(option) {
   let speechSet = dinoSpeech
   if (guide.name === 'whale') speechSet = whaleSpeech
   if (guide.name === 'spider') speechSet = spidermanSpeech
+  if (guide.name === 'tiana') speechSet = tianaSpeech
 
   if (option === challenge.answer) {
     playSound("correct")
