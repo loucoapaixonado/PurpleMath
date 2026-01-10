@@ -10,10 +10,10 @@ body {
 
 /* TEMA TERRA - Tons quentes, marrom e verde */
 body.theme-terra {
-  --theme-primary: #92400e;
-  --theme-secondary: #b45309;
-  --theme-dark: #3f2817;
-  --theme-accent: #d97706;
+  --theme-primary: #c9497e;
+  --theme-secondary: #ef4e91;
+  --theme-dark: #4b0828;
+  --theme-accent: #ed6c97;
 }
 
 /* TEMA OCEANO - Azuis e turquesa */
@@ -26,18 +26,18 @@ body.theme-oceano {
 
 /* TEMA NOVA YORK - Roxo/Azul escuro urbano */
 body.theme-newyork {
-  --theme-primary: #4338ca;
-  --theme-secondary: #6366f1;
-  --theme-dark: #1f2937;
-  --theme-accent: #818cf8;
+    --theme-primary: #0f3355;
+    --theme-secondary: #c52a41;
+    --theme-dark: #69111e;
+    --theme-accent: #24598b;
 }
 
 /* TEMA NOVA ORLEANS - Ouro, verde quente e roxo */
 body.theme-neworleans {
-  --theme-primary: #b45309;
-  --theme-secondary: #d97706;
-  --theme-dark: #451a03;
-  --theme-accent: #fcd34d;
+    --theme-primary: #077310;
+    --theme-secondary: #07bf42;
+    --theme-dark: #034503;
+    --theme-accent: #15a317;
 }
 
 /* TEMA COREIA - Azul cyan/moderno e roxo */
@@ -243,7 +243,7 @@ button:hover {
 #introScreen {
   position: fixed;
   inset: 0;
-  background: linear-gradient(160deg, var(--theme-accent), var(--theme-primary));
+  background: linear-gradient(160deg, var(--theme-dark), var(--theme-primary));
   display: flex;
   align-items: center;
   justify-content: center;
