@@ -1,116 +1,111 @@
 export const dinoSpeech = {
   introPhase:`
-    Oi neném! Eu sou o Spike 💜  
-    Eu vou te acompanhar nessa aventura pela matemática.
-    Sei que sou um dragão, mas serei seu guia na ilha dos dinossauros hehehe.
-    Vamos aprender juntos?
-    E também vamos ganhar umas coisinhas legais pelo caminho! 😉`,
-  map: "Que tal começar uma lição? 💜",
+    Oiê! 🩷 Eu sou a Pinkie Pie 🎉
+    Adoro festas, surpresas e sorrisos — e adoro matemática também!
+    Vamos transformar cada exercício numa mini-comemoração?
+    Risadas, confetes e muita curiosidade garantidos!`,
+  map: "Que tal começar uma lição? 🎈",
   correct: [
-    "Issooo! Mandou muito bem ✨",
-    "Eu sabia que você ia conseguir!",
-    "Aprender assim é mais gostoso 😄"
+    "Yay! Mandou muito bem! 🎉",
+    "Uhul! Isso merece um bolo e um abraço! 🧁",
+    "Você brilha — foi perfeito! ✨"
   ],
   wrong: [
-    "Tudo bem errar 💜 tenta de novo!",
-    "Sem pressa, eu tô aqui!",
-    "Quase! Você é boa!."
+    "Tá tudo bem errar — isso é só um passo pra acertar depois! 🩷",
+    "Respira, tenta de novo, e eu trago mais confete! 🎊",
+    "Não desanima, vamos rir e tentar de novo! 😄"
   ],
   progress: {
     start: [
-      "Ei, você já começou! Isso é o mais importante 💜",
-      "Primeiro passo dado! Estou orgulhoso de você. ✨"
+      "Oba! Você já começou — festinha de início! 🎉",
+      "Primeiro passo dado, vamos celebrar cada conquista! 🥳"
     ],
     middle: [
-      "Olha só quanto você já avançou! 🚀",
-      "Você está pegando o jeito, hein?",
-      "Tá vendo como matemática pode ser mais leve? 😄"
+      "Que progresso incrível — tempo de encher a festa de balões! 🎈",
+      "Você está indo muito bem, continuo animada por aqui! 🩷",
+      "Cada acerto é um motivo pra sorrir — continue! 😄"
     ],
     almost: [
-      "Uau! Parabéns você chegou até o aqui! 🏁",
-      "Eu sabia que você ia conseguir! ✨",
-      "Você chegou muito longe, parabéns! 🎉"
+      "Uau, tão perto da linha de chegada — vamos comemorar em grande! 🏁",
+      "Quase lá! Preparando a festa de vitória! ✨",
+      "Incrível! Só mais um empurrãozinho e tem confete! 🎊"
     ]
   },
-  finishLesson: "Uau! Lição completa 🎉",
+  finishLesson: "Lição completa! Hora da festa! 🎉",
   endPhase:`
-    Uau! Você mandou muito bem! 🎉  
-    Estou orgulhoso de você.
-    Matemática fica muito mais fácil quando a gente vai com calma.
-    Preparada para a próxima aventura?`
+    Que jornada divertida! 🎉
+    Estou muito orgulhosa de você — vamos pra próxima aventura com música e alegria!`
 }
 
 export const whaleSpeech = {
   introPhase: `
-    Olá... 🌊  
-    Eu sou a Baleia Jubarte 🐋  
-    No oceano, tudo tem ritmo, calma e profundidade.
-    Vamos aprender matemática no nosso tempo?
-    `,
-  map: "Que tal começar uma lição? 💜",
+    Meu nome é Woo Young-woo. 
+    Não importa a ordem que for lido ainda vai ser Woo Young-woo.
+    Como catraca, caneca, casaca, cômico, careca, Woo Young-woo.
+    Gosto de observar detalhes e encontrar a lógica nas coisas.`,
+  map: "Que tal começar uma lição? 🐋",
   correct: [
-    "Muito bem... você sentiu o ritmo 🌊",
-    "Excelente! Vamos seguir a corrente."
+    "Muito bem — você observou corretamente.",
+    "Excelente trabalho. A lógica ficou clara." 
   ],
   wrong: [
-    "Tudo bem... vamos tentar de novo com calma.",
-    "Sem pressa. O oceano ensina paciência."
+    "Tudo bem errar. Podemos revisar passo a passo.",
+    "Respire; observe os detalhes e tente novamente." 
   ],
   progress: {
     start: [
-      "Ei, você já começou! Isso é o mais importante 💜",
-      "Primeiro passo dado! Estou orgulhoso de você. ✨"
+      "Você iniciou a jornada de forma cuidadosa — ótimo começo.",
+      "Primeiro passo concluído; vamos manter a atenção nas etapas." 
     ],
     middle: [
-      "Olha só quanto você já avançou! 🚀",
-      "Você está pegando o jeito, hein?",
-      "Tá vendo como matemática pode ser mais leve? 😄"
+      "Seu progresso é consistente; está vendo padrões importantes.",
+      "Continue assim — pequenas observações levam a grandes descobertas.",
+      "Seu entendimento está se aprofundando; muito bem." 
     ],
     almost: [
-      "Uau! Parabéns você chegou até o aqui! 🏁",
-      "Eu sabia que você ia conseguir! ✨",
-      "Você chegou muito longe, parabéns! 🎉"
+      "Quase lá — seus padrões e raciocínios estão bem formados.",
+      "Excelente — está dominando a lógica desta fase.",
+      "Parabéns, você chegou muito longe com atenção e método." 
     ]
   },
-  finishLesson: "Você navegou muito bem por essa lição 🌊",
-  endPhase: "Que jornada linda pelo oceano... Estou orgulhosa de você 🐋💜"
+  finishLesson: "Lição concluída — excelente trabalho.",
+  endPhase: "Parabéns pela jornada — sua capacidade de observação fez a diferença."
 }
 
 export const spidermanSpeech = {
   introPhase: `
-    Ei! Eu sou o Homem-Aranha! 🕷️💙  
-    Em Nova York, preciso calcular tudo: distâncias, ângulos, formas!
-    Vamos aprender geometria enquanto salvo a cidade?
-    Com grandes poderes vem grande matemática! 💪`,
-  map: "Que tal começar mais uma aventura? 🕷️",
+    Oi! Eu sou seu amigão da vizinhança, o Homem-Aranha! 🕷️
+    Em Nova York a matemática aparece em tudo: distâncias, ângulos e trajetórias.
+    Vamos treinar sua mira e raciocínio pra salvar o dia — com um pouco de bom humor!`,
+  map: "Que tal começar mais uma aventura? 🕸️",
   correct: [
-    "Excelente! Você é um herói! 💙",
-    "Isso aí! Teia perfeita! 🕸️",
-    "Muito bem! Nova York precisa de você!"
+    "Isso foi ótimo! Você mandou super bem!",
+    "Muito bem — continue assim e a cidade está salva!",
+    "Perfeito! Já estou pronto pra te chamar de parceiro!"
   ],
   wrong: [
-    "Tente de novo, herói! 🕷️",
-    "Errou, mas você consegue!",
-    "Sem problema, estou aqui com você!"
+    "Relaxa, todo herói erra às vezes — tenta de novo!",
+    "Não foi dessa vez, mas você aprende com isso!",
+    "Calma! Uma nova tentativa e você acerta na próxima!"
   ],
   progress: {
     start: [
-      "Ótimo! Você começou sua jornada heróica! 💙",
-      "Primeiro passo para se tornar um grande herói!"
+      "Bacana! Você começou sua jornada heróica!",
+      "Primeiro passo rumo a grandes acertos — vamos!"
     ],
     middle: [
-      "Olha só como você está aprendendo! 🕸️",
-      "Você está ficando rápido como uma aranha!",
-      "Nova York vê seu progresso!"
+      "Olha só esse progresso — você está com tudo!",
+      "Maneiro! Você está ficando cada vez melhor.",
+      "Continua assim — estamos quase lá!"
     ],
     almost: [
-      "Quase lá, herói! 🎯",
-      "Você é incrível! 🦸",
-      "Parabéns! Você está salvando o dia! 🌃"
+      "Quase lá, herói! Último esforço!",
+      "Uau, tá arrasando! Pronto pra finalizar com estilo?",
+      "Você está a um passo do sucesso — manda ver!"
     ]
   },
-  finishLesson: "Lição completada! Você é um gênio! 🕷️💙",
-  endPhase: "Parabéns, herói! Você conquistou Nova York! 🌃✨"
+  finishLesson: "Lição completada! Você é incrível! 🕷️",
+  endPhase: "Parabéns, pequena! Lembre-se, com grandes poderes, vêm grandes responsabilidades!✨"
 }
 
 export const tianaSpeech = {
@@ -121,7 +116,7 @@ export const tianaSpeech = {
   correct: [
     "Muito bem! Esse é o tipo de decisão inteligente que constrói sonhos ✨",
     "Perfeito! Planejar assim é pensar no futuro.",
-    "Excelente escolha! Você está mandando muito bem 💜"
+    "Excelente escolha! Você está mandando muito bem 💚"
   ],
   wrong: [
     "Tudo bem errar, faz parte do aprendizado 🌱",
@@ -144,46 +139,46 @@ export const tianaSpeech = {
       "Você está pronta para alcançar seus objetivos!"
     ]
   },
-  finishLesson: "Mais um passo rumo ao seu sonho 💜",
+  finishLesson: "Mais um passo rumo ao seu sonho 💚",
   endPhase: `Parabéns!  
     Você aprendeu a cuidar do dinheiro, planejar gastos e pensar no futuro.  
     Isso é poder de verdade ✨`
 }
 
 export const yoongiSpeech = {
-  introPhase: `Annyeong 💙  
+  introPhase: `안녕하세요 💜  
     Eu sou o Yoongi 🎵  
     Em Seul, aprendemos que tudo tem uma lógica, um padrão, uma estrutura.  
     Vamos explorar o mundo através de lógica, padrões, funções e gráficos?`,
-  map: "Que tal resolver um desafio de lógica? 💙",
+  map: "Que tal resolver um desafio de lógica? 💜",
   correct: [
     "Excelente! Sua lógica está perfeita! 🧠",
     "Muito bem! Você viu o padrão! 🔍",
-    "Perfeito! Suas funções estão corretas! ⚙️"
+    "Perfeito! Suas funções estão corretas!"
   ],
   wrong: [
     "Tente novamente, o padrão está lá. 🤔",
-    "Respire e pense com calma… 💙",
+    "Respire e pense com calma… 💜",
     "Está quase! Observe a sequência novamente."
   ],
   progress: {
     start: [
-      "Você começou sua jornada pela lógica! 💙",
+      "Você começou sua jornada pela lógica! 💜",
       "Primeiro passo na estrutura! Vamos lá!"
     ],
     middle: [
-      "Seus padrões estão ficando mais claros! 🔍",
-      "Você entende a lógica agora! Continue assim 💪",
+      "Seus padrões estão ficando mais claros!",
+      "Você entende a lógica agora! Continue assim!",
       "Os gráficos começam a fazer sentido, né?"
     ],
     almost: [
       "Quase dominando a lógica! 🎵",
       "Seus cálculos estão impecáveis! ✨",
-      "Você é uma máquina de processar padrões! 🤖"
+      "Você é uma máquina de processar padrões!"
     ]
   },
-  finishLesson: "Lição completa! Sua lógica é brilhante! 💙",
+  finishLesson: "Lição completa! Sua lógica é brilhante! 💜",
   endPhase: `Parabéns! 🎉  
     Você dominou a lógica, os padrões, as funções e os gráficos.  
-    Agora você vê o mundo através de estruturas matemáticas! 💙✨`
+    Agora você vê o mundo através de estruturas matemáticas! 💜✨`
 }

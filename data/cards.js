@@ -47,7 +47,7 @@ export const oceanCards = {
     id: "jubarte-equivalent",
     title: "Baleia Jubarte — Mesmo Tamanho",
     image: "assets/cards/jubarte-2.png",
-    fact: "2/4 do oceano é o mesmo que 1/2. A jubarte não liga para a forma, mas para a quantidade!"
+    fact: "Uma jubarte passa 3/4 do tempo submersa, isso em decimal é 0.75!"
   },
 
   "decimal-intro": {
@@ -61,7 +61,7 @@ export const oceanCards = {
     id: "jubarte-compare",
     title: "Baleia Jubarte — Quem Nadou Mais?",
     image: "assets/cards/jubarte-4.png",
-    fact: "0.8 é maior que 0.5. A jubarte sempre escolhe o maior caminho quando quer explorar!"
+    fact: "0.8 é maior que 0.5. Uma jubarte jovem é maior que uma jubarte filhote!"
   },
   
   "fraction-decimal": {
@@ -151,21 +151,21 @@ export const koreaCards = {
     id: "yoongi-logic",
     title: "Yoongi — Lógica é Tudo",
     image: "assets/cards/yoongi-1.png",
-    fact: "A lógica é a base de toda a matemática e programação! 💙🧠"
+    fact: "A lógica é a base de toda a matemática! 💙🧠"
   },
 
   "patterns": {
     id: "yoongi-patterns",
     title: "Yoongi — Padrões em Tudo",
     image: "assets/cards/yoongi-2.png",
-    fact: "Natureza, música, código... tudo tem padrões! 🎵🔍"
+    fact: "Natureza, música, respiração... tudo tem padrões! 🎵🔍"
   },
 
   "simple-functions": {
     id: "yoongi-functions",
     title: "Yoongi — Máquinas Matemáticas",
     image: "assets/cards/yoongi-3.png",
-    fact: "Funções transformam entradas em saídas de forma previsível! ⚙️💙"
+    fact: "Funções transformam entradas em saídas de forma previsível!"
   },
 
   "sequences": {
@@ -184,8 +184,8 @@ export const koreaCards = {
 
   "legendary": {
     id: "yoongi-legendary",
-    title: "✨ Yoongi Lendário ✨",
+    title: "✨ Yoongi PRO MAX ✨",
     image: "assets/cards/yoongi-legendary.png",
-    fact: "Você conquistou o conhecimento máximo em lógica e estrutura! Uma versão lendária do Yoongi celebra sua jornada 💙✨"
+    fact: "Você mostrou que é muito inteligente! Yoongi celebra sua jornada 💙✨"
   }
 }
