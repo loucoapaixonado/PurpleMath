@@ -28,6 +28,9 @@ const rewardOverlay = document.getElementById("rewardOverlay")
 const rewardImg = document.getElementById("rewardImg")
 const rewardTitle = document.getElementById("rewardTitle")
 const rewardBtn = document.getElementById("rewardBtn")
+const helpBtn = document.getElementById("helpBtn")
+const helpScreen = document.getElementById("helpScreen")
+const helpContent = document.getElementById("helpContent")
 
 window.addEventListener('load', () => {
   // restaura progresso por fase (se houver)
@@ -55,6 +58,7 @@ window.addEventListener('load', () => {
 })
 
 document.getElementById("collectionBtn").onclick = openCollection
+document.getElementById("helpBtn").onclick = openHelp
 
 // =======================
 // LIÇÕES — FASE 1 (DINO)
@@ -506,6 +510,41 @@ function closeLegendaryCard() {
   if (overlay) overlay.remove()
 }
 
+function openHelp() {
+  const currentLesson = currentPhase.lessons[currentPhase.progress.currentLessonIndex]
+  if (currentLesson && currentLesson.help) {
+    helpContent.innerHTML = currentLesson.help
+  } else {
+    helpContent.innerHTML = `
+      <h2>Como Jogar MathVerse Roxo</h2>
+      <p>Bem-vindo ao MathVerse Roxo! Aqui você aprenderá matemática de forma divertida com personagens incríveis.</p>
+      <h3>Objetivo</h3>
+      <p>Complete lições matemáticas, ganhe XP e colete figurinhas especiais de cada fase.</p>
+      <h3>Como Jogar</h3>
+      <ul>
+        <li><strong>☰ Menu:</strong> Abre o menu lateral para navegar entre fases e lições.</li>
+        <li><strong>🏆 Coleção:</strong> Veja todas as figurinhas que você coletou.</li>
+        <li><strong>❓ Ajuda:</strong> Mostra esta tela de ajuda.</li>
+        <li><strong>Responder Questões:</strong> Clique na resposta correta para avançar.</li>
+        <li><strong>Progresso:</strong> Complete lições para desbloquear novas fases.</li>
+      </ul>
+      <h3>Fases</h3>
+      <p>Cada fase tem um personagem guia diferente e temas únicos de matemática.</p>
+      <h3>Dicas</h3>
+      <ul>
+        <li>Preste atenção nas histórias contadas pelo personagem.</li>
+        <li>Responda rapidamente para ganhar mais XP.</li>
+        <li>Colete todas as figurinhas para completar sua coleção!</li>
+      </ul>
+    `
+  }
+  helpScreen.style.display = "flex"
+}
+
+function closeHelp() {
+  helpScreen.style.display = "none"
+}
+
 // =======================
 // MAPA
 // =======================
@@ -738,6 +777,7 @@ window.resetProgress = resetProgress
 window.closeCollection = closeCollection
 window.closeCard = closeCard
 window.closeLegendaryCard = closeLegendaryCard
+window.closeHelp = closeHelp
 
 // A inicialização agora ocorre no handler de 'load' para garantir que o DOM e o localStorage
 // já estejam prontos antes de sincronizar o estado da aplicação.

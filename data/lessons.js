@@ -3,6 +3,7 @@ export const terraLessons = [
     id: "contagem",
     title: "🦴 Contando fósseis",
     story: "Quantos ossos de dinossauro temos aqui?",
+    help: "<h3>Contagem Básica</h3><p>Aprenda a contar objetos simples. Cada 🦴 representa um objeto a ser contado. Responda quantos há no total.</p>",
     challenges: [
       { question: "🦴 ", options: [2, 3, 1], answer: 1 },
       { question: "🦴 🦴", options: [1, 2, 3], answer: 2 },
@@ -21,6 +22,7 @@ export const terraLessons = [
     id: "soma",
     title: "➕ Juntando fósseis",
     story: "Achei mais ossos de dinossauro, vamos juntar tudo!",
+    help: "<h3>Soma Básica</h3><p>Aprenda a somar números. A soma combina dois ou mais números para obter um total maior.</p>",
     challenges: [
       { question: "Eu tinha 2 ossos, achei mais 1. <br><br> 🦴🦴 + 🦴 <br><br> Quantos ossos eu tenho agora?", options: [2, 3, 4], answer: 3 },
       { question: "Eu tinha 3 ossos, achei mais 2. <br><br> 🦴🦴🦴 + 🦴🦴 <br><br> Quantos ossos eu tenho agora?", options: [4, 5, 6], answer: 5 },
@@ -45,6 +47,7 @@ export const terraLessons = [
     id: "subtracao",
     title: "➖ Perdendo fósseis",
     story: "Ah não! Eu perdi alguns ossos de dinossauro!",
+    help: "<h3>Subtração Básica</h3><p>Aprenda a subtrair números. A subtração encontra a diferença entre dois números.</p>",
     challenges: [
       { question: "Eu tinha 5 ossos, perdi 1. <br><br> 🦴🦴🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
       { question: "Eu tinha 6 ossos, perdi 2. <br><br> 🦴🦴❌🦴🦴❌ <br><br> Quantos ossos sobraram?", options: [3, 4, 5], answer: 4 },
@@ -72,6 +75,7 @@ export const terraLessons = [
     id: "multiplicacao",
     title: "✖️ Ninho de ovos",
     story: "Olha que legal! Encontrei alguns ninhos de dinossauros! 🥚",
+    help: "<h3>Multiplicação Básica</h3><p>Aprenda a multiplicar números. A multiplicação é uma forma rápida de somar o mesmo número várias vezes.</p>",
     challenges: [
     { question: "Aqui tem 2 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [2, 4, 6], answer: 4 },
     { question: "Aqui tem 3 ninhos com 2 ovos em cada um.<br><br> [🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos temos?", options: [4, 6, 8], answer: 6 },
@@ -100,6 +104,7 @@ export const terraLessons = [
     id: "divisao",
     title: "➗ Dividindo fósseis",
     story: "Humm, tem alguns ovos fora do ninho. Vamos colocar no lugar!",
+    help: "<h3>Divisão Básica</h3><p>Aprenda a dividir números. A divisão distribui um número em partes iguais.</p>",
     challenges: [
       { question: "Temos 4 ovos e 2 ninhos.<br><br>[🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [1, 2, 3], answer: 2 },
       { question: "Temos 6 ovos e 3 ninhos.<br><br>[🥚🥚] [🥚🥚] [🥚🥚]<br><br>Quantos ovos ficaram em cada ninho?", options: [1, 3, 2], answer: 2 },
@@ -130,6 +135,7 @@ export const oceanLessons = [
     id: "fractions-intro",
     title: "Partes do Oceano",
     story: "Frações são partes de um todo",
+    help: "<h3>Frações Introdução</h3><p>Frações representam partes de um todo. Elas são escritas como numerador/denominador.</p>",
     challenges: [
       {question: "A baleia comeu 1 de 2 cardumes iguais. Isso representa:",options: ["1/3", "1/2", "2/1"],answer: "1/2"},
       {question: "Se o oceano fosse dividido em 4 partes iguais, uma parte seria:",options: ["1/2", "1/4", "4/1"],answer: "1/4"},
@@ -148,6 +154,7 @@ export const oceanLessons = [
     id: "fractions-equivalent",
     title: "Frações Equivalentes",
     story: "Porções diferentes, mesmo tamanho",
+    help: "<h3>Frações Equivalentes</h3><p>Frações equivalentes representam a mesma parte de um todo, mesmo com números diferentes.</p>",
     challenges: [
       {question: "2/4 do oceano é o mesmo que:",options: ["1/2", "3/4", "4/2"],answer: "1/2"},
       {question: "A jubarte nadou 3/6 do percurso. Isso equivale a:",options: ["1/2", "2/3", "6/3"],answer: "1/2"},
@@ -171,6 +178,7 @@ export const oceanLessons = [
     id: "decimal-intro",
     title: "Decimais no Oceano",
     story: "Frações em forma decimal",
+    help: "<h3>Decimais Introdução</h3><p>Decimais são outra forma de representar frações, usando base 10.</p>",
     challenges: [
       {question: "1/2 em decimal é:",options: ["0.5", "0.2", "1.2"],answer: "0.5"},
       {question: "A jubarte nadou 0.5 do percurso. Isso é:",options: ["1/4", "1/2", "2/5"],answer: "1/2"},
@@ -194,6 +202,7 @@ export const oceanLessons = [
     id: "decimal-comparison",
     title: "Comparando Decimais",
     story: "Qual o maior? E qual o menor?",
+    help: "<h3>Comparação de Decimais</h3><p>Aprenda a comparar decimais para ver qual é maior ou menor.</p>",
     challenges: [
       {question: "0.7 é maior que 0.5?",options: ["Sim", "Não"],answer: "Sim"},
       {question: "Qual é maior?",options: ["0.3", "0.8", "0.5"],answer: "0.8"},
@@ -217,6 +226,7 @@ export const oceanLessons = [
     id: "fraction-decimal",
     title: "Frações + Decimais",
     story: "Traduzindo o oceano",
+    help: "<h3>Frações e Decimais</h3><p>Converta entre frações e decimais para entender suas relações.</p>",
     challenges: [
       {question: "Qual fração representa 0.5?",options: ["1/2", "1/4", "2/5"],answer: "1/2"},
       {question: "0.25 corresponde a:",options: ["1/4", "1/2", "3/4"],answer: "1/4"},
@@ -243,6 +253,7 @@ export const newyorkLessons = [
     id: "discounts",
     title: "Descontos em NY",
     story: "Lojas oferecem descontos e um herói precisa calcular rápido.",
+    help: "<h3>Descontos</h3><p>Descontos reduzem o preço original. Calcule a porcentagem de desconto.</p>",
     challenges: [
       { question: "Um item de 100 com 50% de desconto custa:", options: [50, 75, 25], answer: 50 },
       { question: "20% de desconto significa pagar:", options: ["80%", "20%", "100%"], answer: "80%" },
@@ -266,6 +277,7 @@ export const newyorkLessons = [
     id: "shapes-intro",
     title: "Formas de Nova York",
     story: "Os prédios de Nova York têm muitas formas!",
+    help: "<h3>Formas Geométricas</h3><p>Aprenda sobre formas básicas como quadrados, triângulos e círculos.</p>",
     challenges: [
       {question: "Um prédio tem 4 lados iguais e 4 ângulos retos. É um:",options: ["Triângulo", "Quadrado", "Círculo"],answer: "Quadrado"},
       {question: "Quantos lados tem um triângulo?",options: ["3", "4", "5"],answer: "3"},
@@ -289,6 +301,7 @@ export const newyorkLessons = [
     id: "perimeter",
     title: "Perímetro das Ruas",
     story: "Perímetro é o contorno das formas. Me ajude a calcular!",
+    help: "<h3>Perímetro</h3><p>O perímetro é a medida do contorno de uma forma.</p>",
     challenges: [
       {question: "Um quadrado tem lado de 5m. Qual é o perímetro?",options: ["10m", "15m", "20m"],answer: "20m"},
       {question: "Um retângulo tem 6m de comprimento e 4m de largura. Perímetro?",options: ["10m", "20m", "24m"],answer: "20m"},
@@ -312,6 +325,7 @@ export const newyorkLessons = [
     id: "area",
     title: "Área dos Prédios",
     story: "A área é todo o espaço dentro das formas, vamos calcular!",
+    help: "<h3>Área</h3><p>A área é a medida do espaço interno de uma forma.</p>",
     challenges: [
       {question: "Um quadrado com lado 5m tem área de:",options: ["10m²", "20m²", "25m²"],answer: "25m²"},
       {question: "Um retângulo 6m x 4m tem área de:",options: ["10m²", "24m²", "48m²"],answer: "24m²"},
@@ -335,6 +349,7 @@ export const newyorkLessons = [
     id: "angles",
     title: "Ângulos nas Construções",
     story: "Os ângulos dos prédios ajudam Homem-Aranha a se mover!",
+    help: "<h3>Ângulos</h3><p>Ângulos são formados por duas linhas que se encontram. Aprenda sobre ângulos retos, agudos e obtusos.</p>",
     challenges: [
       {question: "Quantos graus tem um ângulo reto?",options: ["45°", "90°", "180°"],answer: "90°"},
       {question: "Quanto é a soma dos ângulos de um triângulo?",options: ["90°", "180°", "360°"],answer: "180°"},
@@ -361,6 +376,7 @@ export const neworleansLessons = [
     id: "profit-loss",
     title: "Lucro e Prejuízo",
     story: "No meu restaurante, preciso calcular o lucro de cada prato!",
+    help: "<h3>Lucro e Prejuízo</h3><p>Lucro é quando você ganha mais do que gasta. Prejuízo é o oposto.</p>",
     challenges: [
       { question: "Um prato custa 20 pra fazer e é vendido por 50. Qual o lucro?", options: [20, 30, 70], answer: 30 },
       { question: "Se gastei 100 e ganhei 150, meu lucro foi:", options: [50, 100, 250], answer: 50 },
@@ -384,6 +400,7 @@ export const neworleansLessons = [
     id: "profit-margin",
     title: "Margem de Lucro",
     story: "Qual percentual de lucro tenho em cada venda?",
+    help: "<h3>Margem de Lucro</h3><p>A margem de lucro é a porcentagem de lucro sobre o custo.</p>",
     challenges: [
       { question: "Custa 100, vendo por 150. Margem de lucro?", options: ["30%", "50%", "150%"], answer: "50%" },
       { question: "Custa 50, vendo por 100. Qual a margem?", options: ["50%", "100%", "200%"], answer: "100%" },
@@ -407,6 +424,7 @@ export const neworleansLessons = [
     id: "restaurant-layout",
     title: "Layout do Restaurante",
     story: "Preciso organizar meu restaurante com geometria!",
+    help: "<h3>Layout do Restaurante</h3><p>Use geometria para organizar espaços em um restaurante.</p>",
     challenges: [
       { question: "Meu restaurante é retangular: 10m x 8m. Qual a área?", options: ["18m²", "36m²", "80m²"], answer: "80m²" },
       { question: "Se divido em 4 seções iguais, cada uma tem:", options: ["20m²", "40m²", "80m²"], answer: "20m²" },
@@ -430,6 +448,7 @@ export const neworleansLessons = [
     id: "ingredient-cost",
     title: "Custo dos Ingredientes",
     story: "Calculando o custo de cada ingrediente no meu prato!",
+    help: "<h3>Custo dos Ingredientes</h3><p>Calcule o custo de ingredientes por porção.</p>",
     challenges: [
       { question: "Um ingrediente custa 10 pra 2 porções. Custo por porção?", options: [3, 5, 20], answer: 5 },
       { question: "Frango sai 30 o kg. Um prato com 150g custa:", options: [4.5, 5, 45], answer: 4.5 },
@@ -453,6 +472,7 @@ export const neworleansLessons = [
     id: "financial-planning",
     title: "Planejamento Financeiro",
     story: "Vamos planejar o mês da minha loja!",
+    help: "<h3>Planejamento Financeiro</h3><p>Planeje receitas e despesas para gerenciar dinheiro.</p>",
     challenges: [
       { question: "Ganho 1000 por dia. Em 30 dias ganho:", options: [30000, 1000, 3000], answer: 30000 },
       { question: "Se tenho despesa de 15000 e receita de 25000, lucro?", options: [10000, 15000, 40000], answer: 10000 },
@@ -479,6 +499,7 @@ export const koreaLessons = [
     id: "logic-intro",
     title: "Introdução à Lógica",
     story: "Vamos exercitar um pouco nosso raciocínio!",
+    help: "<h3>Lógica Introdução</h3><p>Lógica usa verdadeiro e falso para raciocinar corretamente.</p>",
     challenges: [
       { question: "Se A é verdadeiro e B é verdadeiro, A e B é:", options: ["Falso", "Verdadeiro", "Desconhecido"], answer: "Verdadeiro" },
       { question: "Se A é verdadeiro e B é falso, A ou B é:", options: ["Verdadeiro", "Falso", "Talvez"], answer: "Verdadeiro" },
@@ -502,6 +523,7 @@ export const koreaLessons = [
     id: "patterns",
     title: "Descobrindo Padrões",
     story: "Os padrões estão em toda parte! Você consegue vê-los?",
+    help: "<h3>Padrões</h3><p>Identifique sequências e padrões em números e letras.</p>",
     challenges: [
       { question: "Qual número vem depois? 2, 4, 6, 8, ?", options: [9, 10, 12], answer: 10 },
       { question: "Qual número vem depois? 1, 1, 2, 3, 5, 8, ?", options: [10, 12, 13], answer: 13 },
@@ -520,6 +542,7 @@ export const koreaLessons = [
     id: "simple-functions",
     title: "Funções Simples",
     story: "Funções são como máquinas que transformam entradas em saídas!",
+    help: "<h3>Funções Simples</h3><p>Funções transformam entradas em saídas de forma previsível.</p>",
     challenges: [
       { question: "Em uma função, a entrada gera:", options: ["Saída", "Erro", "Nada"], answer: "Saída" },
       { question: "x = 2 → f(x) = 4 significa:", options: ["Dobrou", "Dividiu", "Zerou"], answer: "Dobrou" },
@@ -538,6 +561,7 @@ export const koreaLessons = [
     id: "sequences",
     title: "Sequências Numéricas",
     story: "Toda sequência tem uma regra. Você consegue encontrá-la?",
+    help: "<h3>Sequências Numéricas</h3><p>Sequências seguem regras matemáticas. Encontre o próximo número.</p>",
     challenges: [
       { question: "Qual é o 6º termo? 2, 4, 6, 8, 10, ?", options: [12, 14, 16], answer: 12 },
       { question: "Qual é o 5º termo? 1, 4, 9, 16, ?", options: [20, 25, 30], answer: 25 },
@@ -561,6 +585,7 @@ export const koreaLessons = [
     id: "basic-graphs",
     title: "Gráficos Básicos",
     story: "Os gráficos mostram a história dos números!",
+    help: "<h3>Gráficos Básicos</h3><p>Gráficos mostram como os números mudam visualmente.</p>",
     challenges: [
       { question: "Gráfico mostra:", options: ["Variação", "Texto", "Erro"], answer: "Variação" },
       { question: "Eixo horizontal é:", options: ["x", "y", "z"], answer: "x" },

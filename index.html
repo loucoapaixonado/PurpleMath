@@ -14,6 +14,7 @@
     <main id="app">
       <button id="menuToggle">☰</button>
       <button id="collectionBtn">🏆</button>
+      <button id="helpBtn">❓</button>
       <div id="progress"></div>
       <div id="phaseBar"></div>
       <div id="character">
@@ -52,6 +53,13 @@
         <h3 id="cardTitle"></h3>
         <p id="cardFact"></p>
         <button onclick="closeCard()">Voltar</button>
+      </div>
+    </section>
+
+    <section id="helpScreen" class="hidden">
+      <div class="card">
+        <div id="helpContent"></div>
+        <button onclick="closeHelp()">Voltar</button>
       </div>
     </section>
   </div>
